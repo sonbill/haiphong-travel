@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <header>
     <h1>Hello</h1>
-  </div>
+  </header>
 </template>
 
 <script>
 export default {
-  name: "home",
-};
+  name:'Header'
+}
 </script>
 
 <style>
+
 </style>

@@ -1,13 +1,11 @@
 <template>
   <div>
-    <h1>Hello</h1>
+    <slot />
   </div>
 </template>
 
 <script>
-export default {
-  name: "home",
-};
+export default {};
 </script>
 
 <style>
