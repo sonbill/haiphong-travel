@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header />
-    <div>content</div>
   </div>
 </template>
 
@@ -10,6 +9,9 @@ import Header from "../components/Header.vue";
 export default {
   components: { Header },
   name: "home",
+  setup() {
+    return {};
+  },
 };
 </script>
 

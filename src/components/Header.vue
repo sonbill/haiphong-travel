@@ -60,7 +60,8 @@
           </button>
         </div>
         <nav class="hidden space-x-10 md:flex">
-          <div class="relative">
+          <!-- NAV ITEM - 1 -->
+          <div class="relative" v-click-outside-element="hideDropdown">
             <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
             <button
               type="button"
@@ -79,9 +80,10 @@
                 focus:ring-indigo-500
                 focus:ring-offset-2
               "
+              @click="toggleDropdown()"
               aria-expanded="false"
             >
-              <span>Solutions</span>
+              <span>Nước ngoài</span>
               <!--
               Heroicon name: mini/chevron-down
 
@@ -125,6 +127,7 @@
                 sm:px-0
                 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2
               "
+              v-show="showDropdown"
             >
               <div
                 class="
@@ -366,26 +369,15 @@
                           d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
                         />
                       </svg>
-                      <span class="ml-3">Contact Sales: </span>
+                      <span class="ml-3">Contact Sales: 028.38383926 </span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <a
-            href="#"
-            class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Pricing</a
-          >
-          <a
-            href="#"
-            class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Docs</a
-          >
-
-          <div class="relative">
+          <!-- NAV ITEM - 2 -->
+          <div class="relative" v-click-outside-element="hideDropdownTwo">
             <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
             <button
               type="button"
@@ -404,9 +396,10 @@
                 focus:ring-indigo-500
                 focus:ring-offset-2
               "
+              @click="toggleDropdownTwo()"
               aria-expanded="false"
             >
-              <span>More</span>
+              <span>Nội địa</span>
               <!--
               Heroicon name: mini/chevron-down
 
@@ -450,6 +443,7 @@
                 px-2
                 sm:px-0
               "
+              v-show="showDropdownTwo"
             >
               <div
                 class="
@@ -612,6 +606,18 @@
               </div>
             </div>
           </div>
+          <!-- NAV ITEM - 3 -->
+          <a
+            href="#"
+            class="text-base font-medium text-gray-500 hover:text-gray-900"
+            >Tours</a
+          >
+          <!-- NAV ITEM - 4 -->
+          <a
+            href="#"
+            class="text-base font-medium text-gray-500 hover:text-gray-900"
+            >Contact</a
+          >
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <a
@@ -671,6 +677,7 @@
         transition
         md:hidden
       "
+      v-click-outside-element="hideMenu"
     >
       <div
         class="
@@ -707,6 +714,7 @@
                   focus:ring-inset
                   focus:ring-indigo-500
                 "
+                @click="closeMenu()"
               >
                 <span class="sr-only">Close menu</span>
                 <!-- Heroicon name: outline/x-mark -->
@@ -728,7 +736,7 @@
               </button>
             </div>
           </div>
-          <div class="mt-6">
+          <div class="mt-6" v-show="showMenu">
             <nav class="grid gap-y-8">
               <a
                 href="#"
@@ -857,7 +865,7 @@
             </nav>
           </div>
         </div>
-        <div class="space-y-6 py-6 px-5">
+        <div class="space-y-6 py-6 px-5" v-show="showMenu">
           <div class="grid grid-cols-2 gap-y-4 gap-x-8">
             <a
               href="#"
@@ -930,7 +938,10 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import ClickOutside from "vue-click-outside";
 export default {
+  directives: { ClickOutside },
   setup() {
     const solutions = [
       {
@@ -1010,7 +1021,52 @@ export default {
       },
       { id: 3, name: "Improve your customer experience", href: "#" },
     ];
-    return { solutions, callsToAction, resources, recentPosts };
+
+    const showDropdown = ref(false);
+    const showDropdownTwo = ref(false);
+    const toggleDropdown = () => {
+      showDropdown.value = !showDropdown.value;
+    };
+    const toggleDropdownTwo = () => {
+      showDropdownTwo.value = !showDropdownTwo.value;
+    };
+
+    const closeDropdown = () => {
+      showDropdown.value = false;
+      showDropdownTwo.value = false;
+    };
+    const hideDropdown = () => {
+      showDropdown.value = false;
+    };
+    const hideDropdownTwo = () => {
+      showDropdownTwo.value = false;
+    };
+
+    const showMenu = ref(false);
+    const closeMenu = () => {
+      showMenu.value = !showMenu.value;
+    };
+
+    const hideMenu = () => {
+      showMenu.value = false;
+    };
+
+    return {
+      toggleDropdown,
+      toggleDropdownTwo,
+      closeDropdown,
+      hideDropdown,
+      hideDropdownTwo,
+      closeMenu,
+      hideMenu,
+      showMenu,
+      showDropdown,
+      showDropdownTwo,
+      solutions,
+      callsToAction,
+      resources,
+      recentPosts,
+    };
   },
 };
 </script>
