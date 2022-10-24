@@ -12,7 +12,8 @@
     "vue-click-outside-element": "^3.0.0",
     "vue-owl-carousel": "^2.0.3",
     "vue-router": "^4.1.5",
-    "vueperslides": "^3.4.2"
+    "vueperslides": "^3.4.2",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
