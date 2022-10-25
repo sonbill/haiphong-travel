@@ -31,12 +31,14 @@
             Sign in to your account
           </h2>
         </div>
-        <form class="mt-8 space-y-6" action="#" method="POST">
+        <form class="mt-8 space-y-6" @submit.prevent="login()">
           <input type="hidden" name="remember" value="true" />
           <div class="-space-y-px rounded-md shadow-sm">
+            <!-- EMAIL -->
             <div>
               <label for="email-address" class="sr-only">Email address</label>
               <input
+                v-model="loginForm.email"
                 id="email-address"
                 name="email"
                 type="email"
@@ -62,9 +64,11 @@
                 placeholder="Email address"
               />
             </div>
+            <!-- PASSWORD -->
             <div>
               <label for="password" class="sr-only">Password</label>
               <input
+                v-model="loginForm.password"
                 id="password"
                 name="password"
                 type="password"
@@ -180,9 +184,22 @@
 
 <script>
 import LoginOrSigninLayout from "../../layouts/LoginOrSigninLayout.vue";
+import { reactive } from "vue";
+import { useStore } from "vuex";
 export default {
   components: { LoginOrSigninLayout },
   name: "login",
-  setup() {},
+  setup() {
+    const loginForm = reactive({ email: "", password: "", isLogin: true });
+    const store = useStore();
+
+    const login = async () => {
+      await store.dispatch("authenticate", loginForm);
+    };
+    return {
+      loginForm,
+      login,
+    };
+  },
 };
 </script>
