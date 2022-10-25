@@ -30,13 +30,14 @@
           Create Account
         </h2>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6" @submit.prevent="register">
         <input type="hidden" name="remember" value="true" />
         <div class="-space-y-px rounded-md shadow-sm">
           <!-- NAME -->
           <div>
             <label for="name" class="sr-only">Name</label>
             <input
+              v-model="registerForm.name"
               id="name"
               name="name"
               type="text"
@@ -66,6 +67,7 @@
           <div>
             <label for="email-address" class="sr-only">Email address</label>
             <input
+              v-model="registerForm.email"
               id="email-address"
               name="email"
               type="email"
@@ -95,6 +97,7 @@
           <div>
             <label for="password" class="sr-only">Password</label>
             <input
+              v-model="registerForm.password"
               id="password"
               name="password"
               type="password"
@@ -126,6 +129,7 @@
               >Password Confirmation</label
             >
             <input
+              v-model="registerForm.password_confirmation"
               id="password-confirmation"
               name="password-confirmation"
               type="password"
@@ -237,7 +241,31 @@
 </template>
 
 <script>
-export default {};
+import LoginOrSigninLayout from "../../layouts/LoginOrSigninLayout.vue";
+
+import { reactive } from "vue";
+import { useStore } from "vuex";
+
+export default {
+  components: { LoginOrSigninLayout },
+  name: "register",
+
+  setup() {
+    const registerForm = reactive({
+      name: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+    });
+    const store = useStore();
+
+    const register = async () => {
+      await store.dispatch("authenticate", registerForm);
+    };
+
+    return { register, registerForm };
+  },
+};
 </script>
 
 <style>
