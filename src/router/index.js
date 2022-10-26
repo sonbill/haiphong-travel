@@ -4,6 +4,8 @@ import Dashboard from '../views/admin/Dashboard.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import auth from '../middleware/auth'
+// import guest from '../middleware/guest'
+import store from '../store/auth'
 
 
 const router = createRouter({
@@ -12,20 +14,40 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      // meta: {
+      //   middleware: [
+      //     auth
+      //   ]
+      // },
+      meta: {
+        auth: true
+      },
     },
     {
       path: '/admin/dashboard',
       name: 'dashboard',
       component: Dashboard,
-      meta: {
-        middleware: [auth]
+      // meta: {
+      //   auth: true
+      // },
+      beforeEnter: async (to, from, next) => {
+        const user = await store.getters["auth/user"]
+        if (!user) {
+          return next({
+            name: 'login'
+          });
+        }
+        return next({ name: 'dashboard' })
       }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      // meta: {
+      //   middleware: [auth]
+      // }
     },
     {
       path: '/register',

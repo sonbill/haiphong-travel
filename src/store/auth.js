@@ -38,6 +38,7 @@ const store = createStore({
               );
               vuexContext.commit('SET_TOKEN', token)
               // this.$router.push('/admin/dashboard')
+              vuexContext.dispatch('getUser', token)
             }
             resolve(response)
             console.log(response)
@@ -47,19 +48,19 @@ const store = createStore({
           });
       })
     },
-    async getUser(vuexContext) {
+    async getUser(vuexContext, token) {
       return new Promise((resolve, reject) => {
-        const accessToken = JSON.parse(Cookies.get("access_token"));
-        if (accessToken) {
+        // const accessToken = JSON.parse(Cookies.get("access_token"));
+        if (token) {
           axios.get("user", {
-            headers: { Authorization: `Bearer ${accessToken}` },
+            headers: { Authorization: `Bearer ${token}` },
           })
             .then((response) => {
               vuexContext.commit('SET_USER', response.data);
               resolve(response.data)
             })
             .catch((error) => {
-              reject(vuexContext.commit("SET_ERRORS", error.response.data));
+              // reject(vuexContext.commit("SET_ERRORS", error.response.data));
             });
         }
       })
