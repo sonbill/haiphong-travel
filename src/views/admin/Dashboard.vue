@@ -3,9 +3,14 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { onMounted } from "vue";
 export default {
   name: "dashboard",
-  setup() {},
+  setup() {
+    const store = useStore();
+    // onMounted(store.dispatch["getUser"]);
+  },
 };
 </script>
 

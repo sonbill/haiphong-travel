@@ -37,8 +37,7 @@ const store = createStore({
                 JSON.stringify(token), { expires: 1 }
               );
               vuexContext.commit('SET_TOKEN', token)
-              // this.$router.push('/admin/dashboard')
-              vuexContext.dispatch('getUser', token)
+              vuexContext.dispatch('getUser')
             }
             resolve(response)
             console.log(response)
@@ -48,12 +47,12 @@ const store = createStore({
           });
       })
     },
-    async getUser(vuexContext, token) {
+    async getUser(vuexContext) {
       return new Promise((resolve, reject) => {
-        // const accessToken = JSON.parse(Cookies.get("access_token"));
-        if (token) {
+        const accessToken = JSON.parse(Cookies.get("access_token"));
+        if (accessToken) {
           axios.get("user", {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${accessToken}` },
           })
             .then((response) => {
               vuexContext.commit('SET_USER', response.data);

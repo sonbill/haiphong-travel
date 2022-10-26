@@ -3,17 +3,10 @@ import store from '../store/auth'; // this-is: dùng để lấy dữ liệu t�
 
 
 
-export default function auth({ next, store }) {
-  console.log(store.getters)
-
-  // const user = computed(async () => store.getters["auth/user"])
-  // if (!user) {
-  //   return next({
-  //     name: 'login'
-  //   })
-  // }
-  // return next()
-}
+// export default function auth({ to, next, store }) {
+//   console.log(to)
+//   next();
+// }
 
 // export default function auth({ next, router }) {
 //   return next();

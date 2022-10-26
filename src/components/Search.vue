@@ -1,11 +1,6 @@
 <template>
   <div>
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search place to go..."
-      class="py-2 px-1 w-full bg-white border-"
-    />
+    
   </div>
 </template>
 
