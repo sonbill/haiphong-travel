@@ -613,10 +613,10 @@
             >Tours</a
           >
           <!-- NAV ITEM - 4 -->
-          <a
-            href="#"
+          <router-link
+            :to="{ name: 'ContactView' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Contact</a
+            >Contact</router-link
           >
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">

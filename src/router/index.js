@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ContactView from '../views/Contact.vue'
 import Dashboard from '../views/admin/Dashboard.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
@@ -12,10 +13,17 @@ import store from '../store/auth'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // HOME
     {
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    // CONTACT
+    {
+      path: '/contact',
+      name: 'ContactView',
+      component: ContactView,
     },
     {
       path: '/admin/dashboard',
