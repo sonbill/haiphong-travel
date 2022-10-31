@@ -186,15 +186,25 @@
 import LoginOrSigninLayout from "../../layouts/LoginOrSigninLayout.vue";
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
 export default {
   components: { LoginOrSigninLayout },
   name: "login",
   setup() {
     const loginForm = reactive({ email: "", password: "", isLogin: true });
     const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
 
     const login = async () => {
-      await store.dispatch("authenticate", loginForm);
+      await store.dispatch("authenticate", loginForm).then(() => {
+        router.push({
+          name: "home",
+          query: {
+            ...route.query,
+          },
+        });
+      });
     };
     return {
       loginForm,

@@ -15,9 +15,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
-      meta: {
-        auth: true
-      },
     },
     {
       path: '/admin/dashboard',
@@ -48,28 +45,34 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: { auth: false },
+      beforeEnter: (async (to, from, next) => {
+        const token = await store.getters['token']
+        if (token && to.meta.auth === false) next({ name: 'home' })
+        next();
+      })
     }
   ]
 })
 
-router.beforeEach(async (to, from, next) => {
-  console.log(to)
-  const token = store.getters['token']
-  if (
-    // make sure the user is authenticated
-    !token &&
-    // ❗️ Avoid an infinite redirect
-    to.name === 'dashboard'
-  ) {
-    // redirect the user to the login page
-    next({ name: 'login' })
-  } else if (token && to.name === 'login' || to.name === 'register') {
-    next(false)
-  } else {
-    next();
-  }
-})
+// router.beforeEach(async (to, from, next) => {
+//   console.log(to)
+//   const token = store.getters['token']
+//   if (
+//     // make sure the user is authenticated
+//     !token &&
+//     // ❗️ Avoid an infinite redirect
+//     to.name === 'dashboard'
+//   ) {
+//     // redirect the user to the login page
+//     next({ name: 'login' })
+//   } else if (token && to.name === 'login' || to.name === 'register') {
+//     next(false)
+//   } else {
+//     next();
+//   }
+// })
 
 export default router;
 
