@@ -215,6 +215,7 @@ import LoginOrSigninLayout from "../../layouts/LoginOrSigninLayout.vue";
 
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   components: { LoginOrSigninLayout },
@@ -228,9 +229,18 @@ export default {
       password_confirmation: "",
     });
     const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
 
     const register = async () => {
-      await store.dispatch("authenticate", registerForm);
+      await store.dispatch("authenticate", registerForm).then(() => {
+        router.push({
+          name: "login",
+          query: {
+            ...route.query,
+          },
+        });
+      });
     };
 
     return { register, registerForm };
