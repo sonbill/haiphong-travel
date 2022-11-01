@@ -13,7 +13,7 @@
     "vue-click-outside": "^1.1.0",
     "vue-click-outside-element": "^3.0.0",
     "vue-owl-carousel": "^2.0.3",
-    "vue-router": "^4.1.5",
+    "vue-router": "^4.0.13",
     "vueperslides": "^3.4.2",
     "vuex": "^4.0.2"
   },

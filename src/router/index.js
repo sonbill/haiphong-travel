@@ -6,6 +6,8 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import PageNotFound from '../components/PageNotFound.vue'
 
+import UserLayout from '../layouts/UserLayout.vue'
+
 
 import store from '../store/auth'
 
@@ -18,6 +20,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { layout: UserLayout }
     },
     // CONTACT
     {
@@ -30,7 +33,8 @@ const router = createRouter({
       name: 'dashboard',
       component: Dashboard,
       meta: {
-        auth: true
+        auth: true,
+        layout: UserLayout
       },
       beforeEnter: (async (to, from, next) => {
         const token = await store.getters['token']
