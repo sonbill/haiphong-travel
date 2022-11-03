@@ -7,8 +7,8 @@ import BASE_URL from './plugins/axios'
 
 
 
-import './assets/tailwind.css'
-import './assets/main.css';
+import './assets/css/tailwind.css'
+import './assets/css/main.css';
 
 // Vue.prototype.$http = axios.baseURL = 'http://localhost:8000/api/'
 

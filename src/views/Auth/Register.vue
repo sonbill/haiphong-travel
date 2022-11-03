@@ -14,11 +14,13 @@
     >
       <div class="w-full max-w-md space-y-8">
         <div>
-          <img
-            class="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
+          <router-link :to="{ name: 'home' }">
+            <img
+              class="mx-auto h-12 w-auto"
+              src="../../assets/img/cropped-Vision-Travel-icon.png"
+              alt="logo"
+            />
+          </router-link>
           <h2
             class="
               mt-6
@@ -55,9 +57,9 @@
                   text-gray-900
                   placeholder-gray-500
                   focus:z-10
-                  focus:border-indigo-500
+                  focus:border-orange-500
                   focus:outline-none
-                  focus:ring-indigo-500
+                  focus:ring-orange-500
                   sm:text-sm
                 "
                 placeholder="Name"
@@ -85,9 +87,9 @@
                   text-gray-900
                   placeholder-gray-500
                   focus:z-10
-                  focus:border-indigo-500
+                  focus:border-orange-500
                   focus:outline-none
-                  focus:ring-indigo-500
+                  focus:ring-orange-500
                   sm:text-sm
                 "
                 placeholder="Email address"
@@ -115,9 +117,9 @@
                   text-gray-900
                   placeholder-gray-500
                   focus:z-10
-                  focus:border-indigo-500
+                  focus:border-orange-500
                   focus:outline-none
-                  focus:ring-indigo-500
+                  focus:ring-orange-500
                   sm:text-sm
                 "
                 placeholder="Password"
@@ -146,9 +148,9 @@
                   text-gray-900
                   placeholder-gray-500
                   focus:z-10
-                  focus:border-indigo-500
+                  focus:border-orange-500
                   focus:outline-none
-                  focus:ring-indigo-500
+                  focus:ring-orange-500
                   sm:text-sm
                 "
                 placeholder="Confirm Password"
@@ -167,23 +169,23 @@
                 justify-center
                 rounded-md
                 border border-transparent
-                bg-indigo-600
+                bg-orange-500
                 py-2
                 px-4
                 text-sm
                 font-medium
                 text-white
-                hover:bg-indigo-700
+                hover:bg-orange-600
                 focus:outline-none
                 focus:ring-2
-                focus:ring-indigo-500
+                focus:ring-orange-500
                 focus:ring-offset-2
               "
             >
               <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                 <!-- Heroicon name: mini/lock-closed -->
                 <svg
-                  class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
+                  class="h-5 w-5 text-orange-300 group-hover:text-orange-200"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
@@ -202,7 +204,7 @@
           <div class="text-sm justify-center flex space-x-1">
             <router-link
               :to="{ name: 'login' }"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
+              class="font-medium text-orange-600 hover:text-orange-500"
               >Already have an account?</router-link
             >
           </div>
