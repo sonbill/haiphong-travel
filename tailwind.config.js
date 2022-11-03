@@ -4,7 +4,11 @@ module.exports = {
     './index.html', './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    // colors: {
+    //   borderColor: '#bdbdbd',
+    //   placeholderColor: '#bbb',
+    //   textColor: '#71717a'
+    // }
   },
   plugins: [
     '@tailwindcss/forms',

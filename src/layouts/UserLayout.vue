@@ -1,7 +1,9 @@
 <template>
   <div>
     <Header />
-    <slot />
+    <div class="mt-10">
+      <slot />
+    </div>
   </div>
 </template>
 

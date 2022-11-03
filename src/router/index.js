@@ -27,6 +27,7 @@ const router = createRouter({
       path: '/contact',
       name: 'ContactView',
       component: ContactView,
+      meta: { auth: false, layout: UserLayout }
     },
     {
       path: '/admin/dashboard',

@@ -1,138 +1,173 @@
 <template>
-  <div>
-    <h1>Need to contact us?</h1>
-    <div class="w-[500px]">
-      <div>
-        <h2>Email us</h2>
-        <p>Hãy để lại Email và chúng tôi sẽ liên hệ lại bạn sau 24 giờ tới</p>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+    <!-- PAGE TITLE -->
+    <h1 class="font-bold text-3xl mb-10">{{ PageTitle }}</h1>
+    <!-- CONTACT - CONTENT -->
+    <div class="flex md:flex-row flex-col">
+      <!-- CONTACT - FORM -->
+      <div class="w-full md:w-[60%] mx-auto px-5 mb-10 md:mb-0">
+        <!-- FORM - TITLE -->
+        <div class="mb-5">
+          <h2 class="text-xl font-bold">Email us</h2>
+          <p class="font-medium text-sm text-gray-900 italic">
+            Hãy để lại Email và chúng tôi sẽ liên hệ lại bạn sau 24 giờ tới
+          </p>
+        </div>
+        <!-- FORM -->
+        <form action="" class="space-y-5">
+          <!-- ROW 1 -->
+          <div class="flex space-x-5">
+            <!-- FULLNAME -->
+            <div class="flex-1">
+              <label for="fullname" class="sr-only">Full name</label>
+              <input
+                id="fullname"
+                name="fullname"
+                type="text"
+                autocomplete="current-fullname"
+                required
+                class="
+                  relative
+                  block
+                  w-full
+                  appearance-none
+                  rounded-none
+                  border border-gray-300
+                  px-3
+                  py-2
+                  text-gray-900
+                  placeholder-gray-500
+                  focus:z-10
+                  focus:border-indigo-500
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  sm:text-sm
+                "
+                placeholder="Fullname"
+              />
+            </div>
+            <!-- EMAIL -->
+            <div class="flex-1">
+              <label for="email" class="sr-only">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="current-email"
+                required
+                class="
+                  relative
+                  block
+                  w-full
+                  appearance-none
+                  rounded-none
+                  border border-gray-300
+                  px-3
+                  py-2
+                  text-gray-900
+                  placeholder-gray-500
+                  focus:z-10
+                  focus:border-indigo-500
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  sm:text-sm
+                "
+                placeholder="someone@example.com"
+              />
+            </div>
+          </div>
+          <!-- ROW 2 -->
+          <div>
+            <div>
+              <label for="ct-number" class="sr-only">Contact Number</label>
+              <input
+                id="ct-number"
+                name="ct-number"
+                type="number"
+                autocomplete="current-ct-number"
+                required
+                class="
+                  relative
+                  block
+                  w-full
+                  appearance-none
+                  rounded-none
+                  border border-gray-300
+                  px-3
+                  py-2
+                  text-gray-900
+                  placeholder-gray-500
+                  focus:z-10
+                  focus:border-indigo-500
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  sm:text-sm
+                "
+                placeholder="123 456 789"
+              />
+            </div>
+          </div>
+          <!-- ROW 3 -->
+          <div>
+            <div>
+              <label for="message" class="sr-only">What's you message?</label>
+              <textarea
+                name="message"
+                id="message"
+                type="text"
+                required
+                class="
+                  relative
+                  block
+                  w-full
+                  appearance-none
+                  rounded-none
+                  border border-gray-300
+                  px-3
+                  py-2
+                  text-gray-900
+                  placeholder-gray-500
+                  focus:z-10
+                  focus:border-indigo-500
+                  focus:outline-none
+                  focus:ring-indigo-500
+                  sm:text-sm
+                "
+                placeholder="Your message..."
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              class="px-3 py-2 border border-1-solid rounded-md"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-      <form action="" class="space-y-5">
-        <!-- ROW 1 -->
-        <div class="flex space-x-5">
-          <!-- FULLNAME -->
-          <div>
-            <label for="fullname" class="sr-only">Full name</label>
-            <input
-              id="fullname"
-              name="fullname"
-              type="text"
-              autocomplete="current-fullname"
-              required
-              class="
-                relative
-                block
-                w-full
-                appearance-none
-                rounded-none
-                border border-gray-300
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                focus:z-10
-                focus:border-indigo-500
-                focus:outline-none
-                focus:ring-indigo-500
-                sm:text-sm
-              "
-              placeholder="Fullname"
-            />
-          </div>
-          <!-- EMAIL -->
-          <div>
-            <label for="email" class="sr-only">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autocomplete="current-email"
-              required
-              class="
-                relative
-                block
-                w-full
-                appearance-none
-                rounded-none
-                border border-gray-300
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                focus:z-10
-                focus:border-indigo-500
-                focus:outline-none
-                focus:ring-indigo-500
-                sm:text-sm
-              "
-              placeholder="someone@example.com"
-            />
-          </div>
-        </div>
-        <!-- ROW 2 -->
+      <!-- CONTACT - INFO -->
+      <div class="w-full md:w-[30%] mx-auto px-5 space-y-5">
+        <h4 class="text-xl font-bold">TRIP QUERIES</h4>
+        <!-- HOTLINE -->
         <div>
-          <div>
-            <label for="ct-number" class="sr-only">Contact Number</label>
-            <input
-              id="ct-number"
-              name="ct-number"
-              type="number"
-              autocomplete="current-ct-number"
-              required
-              class="
-                relative
-                block
-                w-full
-                appearance-none
-                rounded-none
-                border border-gray-300
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                focus:z-10
-                focus:border-indigo-500
-                focus:outline-none
-                focus:ring-indigo-500
-                sm:text-sm
-              "
-              placeholder="123 456 789"
-            />
-          </div>
+          <p class="font-medium text-sm text-gray-600">Emergency Helpline</p>
+          <h5 class="text-lg font-bold">0783456789</h5>
         </div>
-        <!-- ROW 3 -->
+        <!-- CONTACTABLE HOURS -->
         <div>
-          <div>
-            <label for="message" class="sr-only">What's you message?</label>
-            <textarea
-              name="message"
-              id="message"
-              type="text"
-              required
-              class="
-                relative
-                block
-                w-full
-                appearance-none
-                rounded-none
-                border border-gray-300
-                px-3
-                py-2
-                text-gray-900
-                placeholder-gray-500
-                focus:z-10
-                focus:border-indigo-500
-                focus:outline-none
-                focus:ring-indigo-500
-                sm:text-sm
-              "
-              placeholder="Your message..."
-            />
-          </div>
+          <p class="font-medium text-sm text-gray-600">Contactable Hours</p>
+          <h5 class="text-lg font-bold">Mon - Sun: 24 HOURS</h5>
         </div>
+        <!-- CONTACT EMAIL -->
         <div>
-          <button type="submit">Submit</button>
+          <p class="font-medium text-sm text-gray-600">
+            Require information about trip?
+          </p>
+          <h5 class="text-lg font-bold">Info@webhotel.vn</h5>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
@@ -141,7 +176,11 @@
 export default {
   name: "ContactView",
 
-  setup() {},
+  setup() {
+    const PageTitle = "Need to contact us?";
+
+    return { PageTitle };
+  },
 };
 </script>
 
