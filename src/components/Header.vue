@@ -36,7 +36,7 @@
               focus:outline-none
               focus:ring-2
               focus:ring-inset
-              focus:ring-indigo-500
+              focus:ring-[#f97316]
             "
             aria-expanded="false"
           >
@@ -77,7 +77,7 @@
                 hover:text-gray-900
                 focus:outline-none
                 focus:ring-2
-                focus:ring-indigo-500
+                focus:ring-[#f97316]
                 focus:ring-offset-2
               "
               @click="toggleDropdown()"
@@ -153,7 +153,7 @@
                   >
                     <!-- Heroicon name: outline/chart-bar -->
                     <svg
-                      class="h-6 w-6 flex-shrink-0 text-indigo-600"
+                      class="h-6 w-6 flex-shrink-0 text-[#f97316]"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -393,7 +393,7 @@
                 hover:text-gray-900
                 focus:outline-none
                 focus:ring-2
-                focus:ring-indigo-500
+                focus:ring-[#f97316]
                 focus:ring-offset-2
               "
               @click="toggleDropdownTwo()"
@@ -641,14 +641,14 @@
               whitespace-nowrap
               rounded-md
               border border-transparent
-              bg-indigo-600
+              bg-[#fb923c]
               px-4
               py-2
               text-base
               font-medium
               text-white
               shadow-sm
-              hover:bg-indigo-700
+              hover:bg-[#f97316]
             "
             >Sign up</router-link
           >
