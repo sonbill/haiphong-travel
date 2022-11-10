@@ -27,7 +27,6 @@
                 autocomplete="current-fullname"
                 required
                 class="
-                  relative
                   block
                   w-full
                   appearance-none
@@ -56,7 +55,6 @@
                 autocomplete="current-email"
                 required
                 class="
-                  relative
                   block
                   w-full
                   appearance-none
@@ -87,7 +85,6 @@
                 autocomplete="current-ct-number"
                 required
                 class="
-                  relative
                   block
                   w-full
                   appearance-none
@@ -117,7 +114,6 @@
                 type="text"
                 required
                 class="
-                  relative
                   block
                   w-full
                   appearance-none
@@ -181,7 +177,7 @@
           <p class="font-medium text-sm text-gray-600">
             Require information about trip?
           </p>
-          <h5 class="text-lg font-bold">Info@webhotel.vn</h5>
+          <h5 class="text-lg font-bold">hptravel@hptravel.com.vn</h5>
         </div>
       </div>
     </div>
