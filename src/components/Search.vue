@@ -24,7 +24,7 @@
               <div class="flex w-full">
                 <div class="text-lg font-bold">Where</div>
                 <select
-                  class="w-full text-[#B9BEC7]"
+                  class="ml-5 w-full text-[#B9BEC7]"
                   name="state"
                   placeholder="Destination"
                 >
@@ -61,7 +61,7 @@
               <div class="flex">
                 <div class="text-lg font-bold">Type</div>
                 <select
-                  class="w-ful text-[#B9BEC7]"
+                  class="ml-5 w-ful text-[#B9BEC7]"
                   name="state"
                   placeholder="Destination"
                 >
@@ -102,66 +102,171 @@
             </div>
           </div>
           <!-- ITEM - 4 -->
-          <button
-            type="button"
-            class="flex grow-1 w-full h-16 md:h-full"
-            @click="toggleShowGuests"
+          <div
+            class="relative w-full h-16 md:h-full"
+            v-click-outside-element="hideDropdown"
           >
-            <div class="px-5 h-full w-full relative">
-              <div class="flex items-center h-full">
-                <div class="text-lg font-bold">Guests</div>
-                <span class="ml-1 text-[#B9BEC7]"> 0 </span>
-                <!-- SHOW DROPDOWN -->
-                <div
-                  v-show="showGuests"
-                  class="absolute left-0 top-[100%] w-full border p-10"
-                >
-                  <div class="input-select-feild-guest" data-name="guests[2]">
-                    <span class="select-guests-value">0</span>
-                    <span class="select-guests-title">Adult</span>
-                    <span class="search-guests-plus btn-guests-change">
-                      <i class="fa-solid fa-plus"></i>
-                    </span>
-                    <span class="search-guests-minus btn-guests-change">
-                      <i class="fa-solid fa-minus"></i>
-                    </span>
-                    <input
-                      type="hidden"
-                      class="select_guests_input_value"
-                      name="guest[2]"
-                      value="0"
-                    />
-                  </div>
-                  <div class="input-select-feild-guest" data-name="guests[3]">
-                    <span class="select-guests-value">0</span>
-                    <span class="select-guests-title">Youth</span>
-                    <span class="search-guests-plus btn-guests-change">
-                      <i class="fa-solid fa-plus"></i>
-                    </span>
-                    <span class="search-guests-minus btn-guests-change">
-                      <i class="fa-solid fa-minus"></i>
-                    </span>
-                  </div>
-                  <div class="input-select-feild-guest" data-name="guests[4]">
-                    <span class="select-guests-value">0</span>
-                    <span class="select-guests-title">Children</span>
-                    <span class="search-guests-plus btn-guests-change">
-                      <i class="fa-solid fa-plus"></i>
-                    </span>
-                    <span class="search-guests-minus btn-guests-change">
-                      <i class="fa-solid fa-minus"></i>
-                    </span>
-                  </div>
+            <button
+              type="button"
+              class="flex grow-1 w-full h-16 md:h-full"
+              @click="toggleShowGuests"
+            >
+              <!-- DROPDOWN TITLE -->
+              <div class="px-5 h-full w-full">
+                <div class="flex items-center h-full">
+                  <div class="text-lg font-bold">Guests</div>
+                  <span class="ml-5 text-[#B9BEC7]">
+                    {{ totalGuestCount }}
+                  </span>
+                </div>
+              </div>
+            </button>
+            <!-- SHOW DROPDOWN -->
+            <div
+              v-show="showGuests"
+              class="
+                absolute
+                bg-[#fff]
+                left-0
+                top-[100%]
+                w-full
+                z-40
+                md:w-full
+                border
+                shadow-md
+                p-5
+                space-y-5
+              "
+            >
+              <!-- ADULT -->
+              <div class="flex justify-between items-center">
+                <span class="select-guests-value">{{ adultNumber }}</span>
+                <span class="select-guests-title">Adult</span>
+                <!-- BUTTONS -->
+                <div class="flex border rounded-lg">
+                  <!-- BUTTON PLUS + -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tl-lg rounded-bl-lg
+                    "
+                    :disabled="adultNumber >= 25"
+                    @click="adultNumber += 1"
+                  >
+                    add
+                  </button>
+                  <!-- BUTTON MINUS - -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tr-lg rounded-br-lg
+                    "
+                    :disabled="adultNumber <= 0"
+                    @click="adultNumber -= 1"
+                  >
+                    remove
+                  </button>
+                </div>
+              </div>
+              <!-- YOUTH -->
+              <div class="flex justify-between items-center">
+                <span class="select-guests-value">{{ youthNumber }}</span>
+                <span class="select-guests-title">Youth</span>
+                <!-- BUTTONS -->
+                <div class="flex border rounded-lg">
+                  <!-- BUTTON PLUS + -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tl-lg rounded-bl-lg
+                    "
+                    :disabled="youthNumber >= 25"
+                    @click="youthNumber += 1"
+                  >
+                    add
+                  </button>
+                  <!-- BUTTON MINUS - -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tr-lg rounded-br-lg
+                    "
+                    :disabled="youthNumber <= 0"
+                    @click="youthNumber -= 1"
+                  >
+                    remove
+                  </button>
+                </div>
+              </div>
+              <!-- CHILDREN -->
+              <div class="flex justify-between items-center">
+                <span class="select-guests-value">{{ childrenNumber }}</span>
+                <span class="select-guests-title">Children</span>
+                <!-- BUTTONS -->
+                <div class="flex border rounded-lg">
+                  <!-- BUTTON PLUS + -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tl-lg rounded-bl-lg
+                    "
+                    :disabled="childrenNumber >= 25"
+                    @click="childrenNumber += 1"
+                  >
+                    add
+                  </button>
+                  <!-- BUTTON MINUS - -->
+                  <button
+                    type="button"
+                    class="
+                      material-icons
+                      text-[#71717a]
+                      hover:text-[#fff]
+                      bg-[#fff]
+                      hover:bg-[#fb923c]
+                      rounded-tr-lg rounded-br-lg
+                    "
+                    :disabled="childrenNumber <= 0"
+                    @click="childrenNumber -= 1"
+                  >
+                    remove
+                  </button>
                 </div>
               </div>
             </div>
-          </button>
+          </div>
         </div>
         <!-- SUBMIT BUTTON -->
         <div class="flex">
           <button
             name="submit"
             class="
+              rounded-sm
               w-full
               items-center
               justify-center
@@ -187,21 +292,38 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import "@vuepic/vue-datepicker/dist/main.css";
+import ClickOutside from "vue-click-outside";
 
 export default {
+  directives: { ClickOutside },
   setup() {
     const searchQuery = ref("");
     const queryTimeout = ref(null);
     const date = ref();
     const datepicker = ref(null);
     const showGuests = ref(false);
+    // ADD GUESTS
+    const adultNumber = ref(0);
+    const youthNumber = ref(0);
+    const childrenNumber = ref(0);
+    const totalGuest = [adultNumber, youthNumber, childrenNumber];
 
+    // CALCULATE TOTAL GUEST BOOKING
+    const totalGuestCount = computed(() => {
+      return totalGuest
+        .map((item) => item.value)
+        .reduce((total, guest) => total + guest);
+    });
+    // TOGGLE SHOW DROPDOWN
     const toggleShowGuests = () => {
       showGuests.value = !showGuests.value;
     };
-
+    // HIDE DROPDOWN WHEN CLICK OUTSIDE
+    const hideDropdown = () => {
+      showGuests.value = false;
+    };
     const yourCustomMethod = () => {
       if (datepicker) {
         // Close the menu programmatically
@@ -217,7 +339,16 @@ export default {
       });
     };
 
-    return { date, toggleShowGuests, showGuests };
+    return {
+      date,
+      toggleShowGuests,
+      showGuests,
+      adultNumber,
+      hideDropdown,
+      childrenNumber,
+      youthNumber,
+      totalGuestCount,
+    };
   },
 };
 </script>

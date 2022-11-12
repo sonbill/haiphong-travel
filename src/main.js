@@ -7,7 +7,6 @@ import BASE_URL from './plugins/axios'
 import Datepicker from '@vuepic/vue-datepicker';
 
 
-
 import './assets/css/tailwind.css'
 import './assets/css/main.css';
 
