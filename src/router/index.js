@@ -5,16 +5,24 @@ import Dashboard from '../views/admin/Dashboard.vue'
 import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import PageNotFound from '../components/PageNotFound.vue'
+import DetailTour from '../views/Tours/DetailTour.vue'
 
 import UserLayout from '../layouts/UserLayout.vue'
 
 
-import store from '../store/auth'
+import store from '../store/store'
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // DETAIL TOUR
+    {
+      path: '/pokemon',
+      name: 'DetailTour',
+      component: DetailTour,
+      meta: { layout: UserLayout }
+    },
     // HOME
     {
       path: '/',

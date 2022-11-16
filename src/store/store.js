@@ -7,10 +7,13 @@ const store = createStore({
   state: {
     token: Cookies.get('access_token') || '',
     user: null,
+    poke: null,
   },
   getters: {
     token: state => state.token,
     user: state => state.user,
+    poke: state => state.poke,
+
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -18,6 +21,9 @@ const store = createStore({
     },
     SET_USER(state, user) {
       state.user = user
+    },
+    SET_POKE(state, poke) {
+      state.poke = poke;
     },
   },
   actions: {
@@ -64,6 +70,19 @@ const store = createStore({
         }
       })
     },
+    async getPoke(vuexContext) {
+      return new Promise((resolve, reject) => {
+        axios.get("https://pokeapi.co/api/v2/pokemon/pikachu")
+          .then((response) => {
+            console.log(response.data);
+            vuexContext.commit('SET_POKE', response.data);
+            resolve(response.data)
+          })
+          .catch((error) => {
+            // reject(vuexContext.commit("SET_ERRORS", error.response.data));
+          });
+      })
+    }
   }
 })
 
