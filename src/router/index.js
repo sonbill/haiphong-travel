@@ -6,6 +6,7 @@ import Login from '../views/Auth/Login.vue'
 import Register from '../views/Auth/Register.vue'
 import PageNotFound from '../components/PageNotFound.vue'
 import DetailTour from '../views/Tours/DetailTour.vue'
+import HotelsHomePage from '../views/Hotels/HotelsHomePage.vue'
 
 import UserLayout from '../layouts/UserLayout.vue'
 
@@ -16,6 +17,13 @@ import store from '../store/store'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // SEARCH HOTELS
+    {
+      path: '/hotels',
+      name: "HotelsHomePage",
+      component: HotelsHomePage,
+      meta: { layout: UserLayout }
+    },
     // DETAIL TOUR
     {
       path: '/pokemon',

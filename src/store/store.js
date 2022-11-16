@@ -8,11 +8,13 @@ const store = createStore({
     token: Cookies.get('access_token') || '',
     user: null,
     poke: null,
+    hotels: null
   },
   getters: {
     token: state => state.token,
     user: state => state.user,
     poke: state => state.poke,
+    hotels: state => state.hotels
 
   },
   mutations: {
@@ -24,6 +26,9 @@ const store = createStore({
     },
     SET_POKE(state, poke) {
       state.poke = poke;
+    },
+    SET_HOTELS(state, hotels) {
+      state.hotels = hotels;
     },
   },
   actions: {
@@ -76,6 +81,28 @@ const store = createStore({
           .then((response) => {
             console.log(response.data);
             vuexContext.commit('SET_POKE', response.data);
+            resolve(response.data)
+          })
+          .catch((error) => {
+            // reject(vuexContext.commit("SET_ERRORS", error.response.data));
+          });
+      })
+    },
+    async getHotels(vuexContext, hotels) {
+      return new Promise((resolve, reject) => {
+        const options = {
+          method: 'GET',
+          url: 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation',
+          params: { query: hotels },
+          headers: {
+            'X-RapidAPI-Key': 'e6610be120mshaad0d1a07c77a23p1dd209jsn64838f259db2',
+            'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+          }
+        };
+        axios.request(options)
+          .then((response) => {
+            console.log(response.data);
+            vuexContext.commit('SET_HOTELS', response.data);
             resolve(response.data)
           })
           .catch((error) => {
