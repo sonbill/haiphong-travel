@@ -95,13 +95,13 @@ const store = createStore({
           url: 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation',
           params: { query: hotels },
           headers: {
-            'X-RapidAPI-Key': 'e6610be120mshaad0d1a07c77a23p1dd209jsn64838f259db2',
+            'X-RapidAPI-Key': 'e491b38cdamshe2872c263d7a4bdp10d663jsn67d754324127',
             'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
           }
         };
         axios.request(options)
           .then((response) => {
-            console.log(response.data);
+            console.log(response);
             vuexContext.commit('SET_HOTELS', response.data);
             resolve(response.data)
           })

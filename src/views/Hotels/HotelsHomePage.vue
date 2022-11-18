@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hotels</h1>
+    <h1 class="">Hotels</h1>
     <SearchLocation />
   </div>
 </template>
