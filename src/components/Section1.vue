@@ -1,7 +1,6 @@
 <template>
   <carousel
     class="w-full"
-    :options="options"
     :autoplay="5000"
     :breakpoints="breakpoints"
     :wrap-around="true"
@@ -29,10 +28,10 @@
           ></div>
         </div>
         <div class="absolute z-20 inset-x-0 bottom-60 space-y-10">
-          <h5 class="font-bold text-xl text-[#fafafa]">
+          <h5 class="font-bold text-3xl text-[#fafafa]">
             {{ slideItem.title }}
           </h5>
-          <h1 class="font-extrabold text-5xl text-white">
+          <h1 class="font-extrabold text-7xl text-white">
             {{ slideItem.content }}
           </h1>
           <div>
@@ -63,8 +62,7 @@
       </div>
     </slide>
     <template #addons>
-      <navigation />
-      <pagination />
+      <navigation class="text-white" />
     </template>
   </carousel>
 </template>
@@ -78,13 +76,13 @@ import Search from "./Search.vue";
 export default {
   components: { Carousel, Slide, Pagination, Navigation, Search },
   setup() {
-    const options = {
-      itemsToShow: 1,
-    };
+    // const options = {
+    //   itemsToShow: 1,
+    // };
     const breakpoints = {
       // 700px and up
       700: {
-        itemsToShow: 3.5,
+        itemsToShow: 1,
         snapAlign: "center",
       },
       // 1024 and up
@@ -101,11 +99,11 @@ export default {
       },
       {
         title: "Qui Nhơn, Bình Định",
-        content: "Kỳ Co.",
+        content: "Kỳ Co",
         img: "https://images.unsplash.com/photo-1598001981130-4c026f1a537b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
       },
     ];
-    return { slides, options, breakpoints };
+    return { slides, breakpoints };
   },
 };
 </script>

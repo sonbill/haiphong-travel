@@ -139,6 +139,8 @@
               >
                 <div
                   class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8"
+                  v-for="destination in destinations"
+                  :key="destination.id"
                 >
                   <a
                     href="#"
@@ -169,166 +171,15 @@
                     </svg>
                     <div class="ml-4">
                       <p class="text-base font-medium text-gray-900">
-                        Analytics
+                        {{ destination }}
                       </p>
                       <p class="mt-1 text-sm text-gray-500">
-                        Get a better understanding of where your traffic is
-                        coming from.
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="
-                      -m-3
-                      flex
-                      items-start
-                      rounded-lg
-                      p-3
-                      hover:bg-gray-50
-                    "
-                  >
-                    <!-- Heroicon name: outline/cursor-arrow-rays -->
-                    <svg
-                      class="h-6 w-6 flex-shrink-0 text-indigo-600"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"
-                      />
-                    </svg>
-                    <div class="ml-4">
-                      <p class="text-base font-medium text-gray-900">
-                        Engagement
-                      </p>
-                      <p class="mt-1 text-sm text-gray-500">
-                        Speak directly to your customers in a more meaningful
-                        way.
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="
-                      -m-3
-                      flex
-                      items-start
-                      rounded-lg
-                      p-3
-                      hover:bg-gray-50
-                    "
-                  >
-                    <!-- Heroicon name: outline/shield-check -->
-                    <svg
-                      class="h-6 w-6 flex-shrink-0 text-indigo-600"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
-                      />
-                    </svg>
-                    <div class="ml-4">
-                      <p class="text-base font-medium text-gray-900">
-                        Security
-                      </p>
-                      <p class="mt-1 text-sm text-gray-500">
-                        Your customers&#039; data will be safe and secure.
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="
-                      -m-3
-                      flex
-                      items-start
-                      rounded-lg
-                      p-3
-                      hover:bg-gray-50
-                    "
-                  >
-                    <!-- Heroicon name: outline/squares-2x2 -->
-                    <svg
-                      class="h-6 w-6 flex-shrink-0 text-indigo-600"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"
-                      />
-                    </svg>
-                    <div class="ml-4">
-                      <p class="text-base font-medium text-gray-900">
-                        Integrations
-                      </p>
-                      <p class="mt-1 text-sm text-gray-500">
-                        Connect with third-party tools that you&#039;re already
-                        using.
-                      </p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="#"
-                    class="
-                      -m-3
-                      flex
-                      items-start
-                      rounded-lg
-                      p-3
-                      hover:bg-gray-50
-                    "
-                  >
-                    <!-- Heroicon name: outline/arrow-path -->
-                    <svg
-                      class="h-6 w-6 flex-shrink-0 text-indigo-600"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4.5 12c0-1.232.046-2.453.138-3.662a4.006 4.006 0 013.7-3.7 48.678 48.678 0 017.324 0 4.006 4.006 0 013.7 3.7c.017.22.032.441.046.662M4.5 12l-3-3m3 3l3-3m12 3c0 1.232-.046 2.453-.138 3.662a4.006 4.006 0 01-3.7 3.7 48.657 48.657 0 01-7.324 0 4.006 4.006 0 01-3.7-3.7c-.017-.22-.032-.441-.046-.662M19.5 12l-3 3m3-3l3 3"
-                      />
-                    </svg>
-                    <div class="ml-4">
-                      <p class="text-base font-medium text-gray-900">
-                        Automations
-                      </p>
-                      <p class="mt-1 text-sm text-gray-500">
-                        Build strategic funnels that will drive your customers
-                        to convert
+                        {{ destination.africa }}
                       </p>
                     </div>
                   </a>
                 </div>
+                <!-- CONTACT -->
                 <div
                   class="
                     space-y-6
@@ -938,7 +789,9 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
+import { ref, onMounted } from "vue";
 import ClickOutside from "vue-click-outside";
 export default {
   directives: { ClickOutside },
@@ -1022,6 +875,66 @@ export default {
       { id: 3, name: "Improve your customer experience", href: "#" },
     ];
 
+    const internationalTours = [
+      {
+        id: 1,
+        name: "Asia",
+        href: "asia",
+        icon: '<span class="material-icons">south_america</span>',
+      },
+      {
+        id: 2,
+        name: "Africa",
+        href: "africa",
+        icon: '<span class="material-icons">south_america</span>',
+      },
+      {
+        id: 3,
+        name: "Europe",
+        href: "europe",
+        icon: '<span class="material-icons">south_america</span>',
+      },
+      {
+        id: 1,
+        name: "Asia",
+        href: "asia",
+        icon: '<span class="material-icons">south_america</span>',
+      },
+      {
+        id: 1,
+        name: "Asia",
+        href: "asia",
+        icon: '<span class="material-icons">south_america</span>',
+      },
+    ];
+    const domesticTours = [];
+
+    const destinations = ref([]);
+
+    const getDestinations = async () => {
+      const querySnapshot = await getDocs(collection(db, "destination"));
+      let fbDestinations = [];
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        const destination = {
+          id: doc.id,
+          africa: doc.data().Africa,
+          asia: doc.data().Asia,
+          europe: doc.data().Europe,
+          na: doc.data().NorthAmerica,
+          sa: doc.data().SouthAmerica,
+        };
+        fbDestinations.push(destination);
+      });
+      destinations.value = fbDestinations;
+      console.log(destinations._rawValue);
+    };
+
+    onMounted(async () => {
+      await getDestinations();
+    });
+
     const showDropdown = ref(false);
     const showDropdownTwo = ref(false);
     const toggleDropdown = () => {
@@ -1066,6 +979,7 @@ export default {
       callsToAction,
       resources,
       recentPosts,
+      destinations,
     };
   },
 };

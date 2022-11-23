@@ -1,12 +1,21 @@
 <template>
-  <div class="flex space-x-5 max-h-96">
-    <div v-for="tour in tours" :key="tour.id" class="relative max-w-md">
+  <carousel
+    class="flex space-x-5 max-h-96 w-full"
+    :autoplay="5000"
+    :breakpoints="breakpoints"
+    :wrap-around="true"
+  >
+    <slide
+      v-for="(tour, index) in tours"
+      :key="index"
+      class="relative w-full mx-0 md:mx-5"
+    >
       <!-- CARD - IMG -->
-      <div class="rounded overflow-hidden shadow-lg w-full h-64">
+      <div class="rounded overflow-hidden shadow-lg w-full h-72">
         <img
           :src="tour.image"
           alt=""
-          class="relative w-full h-full object-cover"
+          class="relative w-full h-full object-cover px-5 md:px-0"
         />
       </div>
       <!-- OVERLAY -->
@@ -31,12 +40,14 @@
           </p>
         </div>
         <!-- ITEM BOTTOM -->
-        <div class="text-white space-y-3">
-          <p class="text-sm font-bold text-gray-200">{{ tour.tourPlace }}</p>
+        <div class="text-white space-y-3 text-left">
+          <p class="text-sm font-bold text-gray-200">
+            {{ tour.tourPlace }}
+          </p>
           <h3 class="text-2xl font-extrabold">{{ tour.tourName }}</h3>
-          <div class="flex items-center space-x-3">
+          <div class="flex items-center space-x-2">
             <span class="material-icons"> schedule </span>
-            <p>{{ tour.time }}</p>
+            <p>{{ tour.time }} days</p>
           </div>
         </div>
         <router-link
@@ -62,19 +73,37 @@
           More information
         </router-link>
       </div>
-    </div>
-  </div>
+    </slide>
+  </carousel>
 </template>
 
 <script>
+import "vue3-carousel/dist/carousel.css";
+import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import { collection, getDocs } from "firebase/firestore";
-import { ref, onMounted } from "vue";
 import { db } from "@/firebase";
+import { ref, onMounted } from "vue";
 export default {
+  components: { Carousel, Slide, Pagination, Navigation },
   setup() {
+    // const options = {
+    //   itemsToShow: 1,
+    // };
+    const breakpoints = {
+      // 700px and up
+      800: {
+        itemsToShow: 1,
+        snapAlign: "center",
+      },
+      // 1024 and up
+      1024: {
+        itemsToShow: 4,
+        snapAlign: "start",
+      },
+    };
     const tours = ref([]);
 
-    onMounted(async () => {
+    const getTours = async () => {
       const querySnapshot = await getDocs(collection(db, "tours"));
       let fbTours = [];
       querySnapshot.forEach((doc) => {
@@ -99,9 +128,13 @@ export default {
       });
       tours.value = fbTours;
       console.log(tours._rawValue);
+    };
+
+    onMounted(async () => {
+      await getTours();
     });
 
-    return { tours };
+    return { tours, breakpoints };
   },
 };
 </script>
