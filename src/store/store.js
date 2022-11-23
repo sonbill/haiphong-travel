@@ -1,6 +1,9 @@
 import { createStore } from 'vuex';
 import Cookies from "js-cookie";
 import axios from 'axios';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
+
 
 
 const store = createStore({
@@ -8,13 +11,15 @@ const store = createStore({
     token: Cookies.get('access_token') || '',
     user: null,
     poke: null,
-    hotels: null
+    hotels: null,
+    tours: null
   },
   getters: {
     token: state => state.token,
     user: state => state.user,
     poke: state => state.poke,
-    hotels: state => state.hotels
+    hotels: state => state.hotels,
+    tours: state => state.tours
 
   },
   mutations: {
@@ -29,6 +34,9 @@ const store = createStore({
     },
     SET_HOTELS(state, hotels) {
       state.hotels = hotels;
+    },
+    SET_TOURS(state, tours) {
+      state.tours = tours;
     },
   },
   actions: {
@@ -109,7 +117,39 @@ const store = createStore({
             // reject(vuexContext.commit("SET_ERRORS", error.response.data));
           });
       })
-    }
+    },
+    // GET TOUR
+    async getTours(vuexContext) {
+      const querySnapshot = await getDocs(collection(db, "tours"));
+      // let fbTours = [];
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        const tour = {
+          id: doc.id,
+          city: doc.data().city,
+          continents: doc.data().continents,
+          country: doc.data().country,
+          description: doc.data().description,
+          image: doc.data().image,
+          price: doc.data().price,
+          saleOff: doc.data().saleOff,
+          time: doc.data().time,
+          tourName: doc.data().tourName,
+          tourPlace: doc.data().tourPlace,
+          tourPlan: doc.data().tourPlan,
+          tourType: doc.data().tourType,
+          // discount:
+          //   doc.data().price - (doc.data().price * doc.data().saleOff) / 100,
+        };
+        vuexContext.commit('SET_TOURS', tour);
+
+        // fbTours.push(tour);
+      });
+      // tours.value = fbTours;
+      // console.log(tours._rawValue);
+    },
+
   }
 })
 

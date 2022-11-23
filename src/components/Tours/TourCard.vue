@@ -32,46 +32,58 @@
         "
       ></div>
       <!-- CARD - TEXT -->
-      <div class="absolute w-full space-y-5 flex flex-col z-10 top-0 p-10">
-        <!-- ITEM - TOP -->
+      <div
+        class="absolute w-full h-full space-y-5 flex flex-col z-10 top-0 p-10"
+      >
+        <!-- ITEM - TEXT - TOP -->
         <div class="flex justify-end">
+          <div v-if="tour.saleOff">
+            <span>{{ tour.discount }}</span>
+          </div>
           <p class="text-white font-medium">
             From <span class="font-bold">{{ tour.price }}</span>
           </p>
         </div>
-        <!-- ITEM BOTTOM -->
+        <!-- ITEM - TEXT - BOTTOM -->
         <div class="text-white space-y-3 text-left">
-          <p class="text-sm font-bold text-gray-200">
-            {{ tour.tourPlace }}
-          </p>
+          <div class="flex items-center">
+            <span class="material-icons"> location_on </span>
+            <p class="text-sm font-bold text-gray-200">
+              {{ tour.tourPlace }}
+            </p>
+          </div>
           <h3 class="text-2xl font-extrabold">{{ tour.tourName }}</h3>
           <div class="flex items-center space-x-2">
             <span class="material-icons"> schedule </span>
             <p>{{ tour.time }} days</p>
           </div>
         </div>
-        <router-link
-          :to="{ name: 'register' }"
-          class="
-            text-white
-            hover:text-white
-            border border-white
-            hover:border-yellow-400 hover:bg-yellow-500
-            focus:ring-4 focus:outline-none focus:ring-yellow-300
-            font-medium
-            rounded-lg
-            text-sm
-            px-5
-            py-2.5
-            text-center
-            dark:border-yellow-300
-            dark:text-yellow-300
-            dark:hover:text-white
-            dark:hover:bg-yellow-400
-          "
-        >
-          More information
-        </router-link>
+        <!-- ITEM - BUTTON LINK -->
+        <div class="absolute inset-x-0 bottom-5">
+          <!-- BUTTON -->
+          <router-link
+            :to="{ name: 'register' }"
+            class="
+              text-white
+              hover:text-white
+              border border-white
+              hover:border-yellow-400 hover:bg-yellow-500
+              focus:ring-4 focus:outline-none focus:ring-yellow-300
+              font-medium
+              rounded-lg
+              text-sm
+              px-5
+              py-2.5
+              text-center
+              dark:border-yellow-300
+              dark:text-yellow-300
+              dark:hover:text-white
+              dark:hover:bg-yellow-400
+            "
+          >
+            More information
+          </router-link>
+        </div>
       </div>
     </slide>
   </carousel>
@@ -80,9 +92,10 @@
 <script>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
-import { ref, onMounted } from "vue";
+
+import { ref, onMounted, computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   components: { Carousel, Slide, Pagination, Navigation },
   setup() {
@@ -101,39 +114,51 @@ export default {
         snapAlign: "start",
       },
     };
-    const tours = ref([]);
 
-    const getTours = async () => {
-      const querySnapshot = await getDocs(collection(db, "tours"));
-      let fbTours = [];
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        const tour = {
-          id: doc.id,
-          city: doc.data().city,
-          continents: doc.data().continents,
-          country: doc.data().country,
-          description: doc.data().description,
-          image: doc.data().image,
-          price: doc.data().price,
-          saleOff: doc.data().saleOff,
-          time: doc.data().time,
-          tourName: doc.data().tourName,
-          tourPlace: doc.data().tourPlace,
-          tourPlan: doc.data().tourPlan,
-          tourType: doc.data().tourType,
-        };
-        fbTours.push(tour);
-      });
-      tours.value = fbTours;
-      console.log(tours._rawValue);
-    };
+    const store = useStore();
+    // const tours = ref([]);
+
+    // const getTours = async () => {
+    //   const querySnapshot = await getDocs(collection(db, "tours"));
+    //   let fbTours = [];
+    //   querySnapshot.forEach((doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     console.log(doc.id, " => ", doc.data());
+    //     const tour = {
+    //       id: doc.id,
+    //       city: doc.data().city,
+    //       continents: doc.data().continents,
+    //       country: doc.data().country,
+    //       description: doc.data().description,
+    //       image: doc.data().image,
+    //       price: doc.data().price,
+    //       saleOff: doc.data().saleOff,
+    //       time: doc.data().time,
+    //       tourName: doc.data().tourName,
+    //       tourPlace: doc.data().tourPlace,
+    //       tourPlan: doc.data().tourPlan,
+    //       tourType: doc.data().tourType,
+    //       discount:
+    //         doc.data().price - (doc.data().price * doc.data().saleOff) / 100,
+    //     };
+    //     let discount = computed(() => {
+    //       tour.price
+    //     });
+    //     fbTours.push(tour);
+    //   });
+    //   tours.value = fbTours;
+    //   console.log(tours._rawValue);
+    // };
 
     onMounted(async () => {
-      await getTours();
+      await store.dispatch("getTours");
     });
 
+    const tours = computed(() => store.getters.tours);
+
+    const discount = computed(() => {
+      console.log(store.getters.tours);
+    });
     return { tours, breakpoints };
   },
 };
