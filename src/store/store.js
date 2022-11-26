@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import axios from 'axios';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
+import { ref } from "vue";
 
 
 
@@ -121,7 +122,7 @@ const store = createStore({
     // GET TOUR
     async getTours(vuexContext) {
       const querySnapshot = await getDocs(collection(db, "tours"));
-      // let fbTours = [];
+      let fbTours = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
@@ -142,10 +143,9 @@ const store = createStore({
           // discount:
           //   doc.data().price - (doc.data().price * doc.data().saleOff) / 100,
         };
-        vuexContext.commit('SET_TOURS', tour);
-
-        // fbTours.push(tour);
+        fbTours.push(tour);
       });
+      vuexContext.commit('SET_TOURS', fbTours);
       // tours.value = fbTours;
       // console.log(tours._rawValue);
     },
