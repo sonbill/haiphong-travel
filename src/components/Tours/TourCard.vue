@@ -37,18 +37,28 @@
       >
         <!-- ITEM - TEXT - TOP -->
         <div class="flex justify-end">
-          <div v-if="tour.saleOff">
-            <span>{{ tour.discount }}</span>
+          <div v-if="tour.saleOff" class="flex space-x-3">
+            <p class="space-x-2">
+              <span class="text-gray-100 text-medium">From</span>
+              <span class="font-extrabold text-white">
+                {{ tour.discount }}</span
+              >
+              <span class="line-through text-gray-100 text-medium">{{
+                tour.price
+              }}</span>
+            </p>
           </div>
-          <p class="text-white font-medium">
-            From <span class="font-bold">{{ tour.price }}</span>
-          </p>
+          <div v-else>
+            <p class="text-white font-medium">
+              From <span class="font-extrabold">{{ tour.price }}</span>
+            </p>
+          </div>
         </div>
         <!-- ITEM - TEXT - BOTTOM -->
         <div class="text-white space-y-3 text-left">
           <div class="flex items-center">
             <span class="material-icons"> location_on </span>
-            <p class="text-sm font-bold text-gray-200">
+            <p class="text-sm font-bold text-gray-100">
               {{ tour.tourPlace }}
             </p>
           </div>
@@ -67,8 +77,8 @@
               text-white
               hover:text-white
               border border-white
-              hover:border-yellow-400 hover:bg-yellow-500
-              focus:ring-4 focus:outline-none focus:ring-yellow-300
+              hover:border-[#fb923c] hover:bg-[#f97316]
+              focus:ring-4 focus:outline-none focus:ring-[#f97316]
               font-medium
               rounded-lg
               text-sm
@@ -156,9 +166,6 @@ export default {
 
     const tours = computed(() => store.getters.tours);
 
-    const discount = computed(() => {
-      console.log(store.getters.tours);
-    });
     return { tours, breakpoints };
   },
 };
