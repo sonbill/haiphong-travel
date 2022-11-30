@@ -12,6 +12,7 @@
       <TourCard />
     </div>
     <Section2 />
+    <TopDescriptions />
   </div>
 </template>
 
@@ -20,8 +21,9 @@ import TourCard from "../components/Tours/TourCard.vue";
 import Section1 from "../components/Section1.vue";
 import Section2 from "../components/Section2.vue";
 import Search from "../components/Search.vue";
+import TopDescriptions from "../components/TopDestinations.vue";
 export default {
-  components: { Section1, Section2, Search, TourCard },
+  components: { Section1, Section2, Search, TourCard, TopDescriptions },
   name: "home",
   setup() {
     return {};
