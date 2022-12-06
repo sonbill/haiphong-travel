@@ -14,7 +14,7 @@
         <div class="col-span-1">
           <div>
             <router-link to="#">
-              <div class="rounded-md">
+              <div>
                 <div
                   class="
                     relative

@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import Cookies from "js-cookie";
 import axios from 'axios';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
 
@@ -13,14 +13,17 @@ const store = createStore({
     user: null,
     poke: null,
     hotels: null,
-    tours: null
+    tours: null,
+    toursSearched: null
   },
   getters: {
     token: state => state.token,
     user: state => state.user,
     poke: state => state.poke,
     hotels: state => state.hotels,
-    tours: state => state.tours
+    tours: state => state.tours,
+    toursSearched: state => state.toursSearched,
+
 
   },
   mutations: {
@@ -38,6 +41,9 @@ const store = createStore({
     },
     SET_TOURS(state, tours) {
       state.tours = tours;
+    },
+    SET_TOURS_SEARCHED(state, toursSearched) {
+      state.toursSearched = toursSearched;
     },
   },
   actions: {
@@ -148,6 +154,15 @@ const store = createStore({
       // tours.value = fbTours;
       // console.log(tours._rawValue);
     },
+    // SEARCH TOUR
+    async searchTour(vuexContext, dataSearch) {
+      const q = query(collection(db, "tours"), where("country", "==", dataSearch.where));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        vuexContext.commit('SET_TOURS_SEARCHED', doc.data());
+      });
+    }
 
   }
 })

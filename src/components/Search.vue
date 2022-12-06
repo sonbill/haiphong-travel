@@ -2,7 +2,7 @@
   <div
     class="max-w-4xl mx-auto md:h-16 md:border md:border-solid-[1px] rounded-sm"
   >
-    <form action="" class="w-full h-full">
+    <form @submit.prevent="submitQuery" class="w-full h-full">
       <div class="flex bg-[#fff] h-full flex-col md:flex-row">
         <div
           class="
@@ -27,18 +27,31 @@
                   class="ml-5 w-full text-[#B9BEC7]"
                   name="state"
                   placeholder="Destination"
+                  v-model="dataSearch.where"
                 >
                   <option value="">- All where -</option>
-                  <optgroup label="Africa">
-                    <option value="">Morocco</option>
-                    <option value="">Tanzania</option>
+                  <optgroup label="Europe">
+                    <option value="England">England</option>
+                    <option value="France">France</option>
+                    <option value="Germany">Germany</option>
                   </optgroup>
                   <optgroup label="Americas">
-                    <option value="">Argentina</option>
-                    <option value="">Canada</option>
-                    <option value="">Colombia</option>
-                    <option value="">Costa Rica</option>
-                    <option value="">United States</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Costa Rica">Costa Rica</option>
+                    <option value="United States">United States</option>
+                  </optgroup>
+                  <optgroup label="Asia">
+                    <option value="Thailand">Thailand</option>
+                    <option value="Việt Nam">Vietnam</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Korea">Korea</option>
+                  </optgroup>
+                  <optgroup label="Oceania">
+                    <option value="Australia">Australia</option>
+                    <option value="New Zealand">New Zealand</option>
                   </optgroup>
                 </select>
               </div>
@@ -64,14 +77,15 @@
                   class="ml-5 w-ful text-[#B9BEC7]"
                   name="state"
                   placeholder="Destination"
+                  v-model="dataSearch.type"
                 >
                   <option value="">- All Type -</option>
-                  <option value="">Adventure</option>
-                  <option value="">Beaches</option>
-                  <option value="">City Tours</option>
-                  <option value="">Hiking</option>
-                  <option value="">Honeymoon</option>
-                  <option value="">Museum Tours</option>
+                  <option value="Adventure">Adventure</option>
+                  <option value="Beaches">Beaches</option>
+                  <option value="City Tours">City Tours</option>
+                  <option value="Hiking">Hiking</option>
+                  <option value="Honeymoon">Honeymoon</option>
+                  <option value="Museum Tours">Museum Tours</option>
                 </select>
               </div>
             </div>
@@ -281,7 +295,7 @@
               shadow-sm
               hover:bg-[#f97316]
             "
-            value="1"
+            type="submit"
           >
             <span>Search</span>
           </button>
@@ -292,13 +306,16 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
+import { useStore } from "vuex";
 import "@vuepic/vue-datepicker/dist/main.css";
 import ClickOutside from "vue-click-outside";
 
 export default {
   directives: { ClickOutside },
   setup() {
+    const store = useStore();
+
     const searchQuery = ref("");
     const queryTimeout = ref(null);
     const date = ref();
@@ -309,6 +326,19 @@ export default {
     const youthNumber = ref(0);
     const childrenNumber = ref(0);
     const totalGuest = [adultNumber, youthNumber, childrenNumber];
+
+    // DATA SEARCH
+    const dataSearch = reactive({
+      where: "",
+      type: "",
+      data: date,
+      guests: totalGuest,
+    });
+
+    // SUBMIT QUERY
+    const submitQuery = async () => {
+      await store.dispatch("searchTour", dataSearch);
+    };
 
     // CALCULATE TOTAL GUEST BOOKING
     const totalGuestCount = computed(() => {
@@ -348,6 +378,8 @@ export default {
       childrenNumber,
       youthNumber,
       totalGuestCount,
+      dataSearch,
+      submitQuery,
     };
   },
 };
