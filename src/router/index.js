@@ -7,6 +7,7 @@ import Register from '../views/Auth/Register.vue'
 import PageNotFound from '../components/PageNotFound.vue'
 import DetailTour from '../views/Tours/DetailTour.vue'
 import HotelsHomePage from '../views/Hotels/HotelsHomePage.vue'
+import Tours from '../views/Tours/Tours.vue'
 
 import UserLayout from '../layouts/UserLayout.vue'
 
@@ -26,9 +27,16 @@ const router = createRouter({
     },
     // DETAIL TOUR
     {
-      path: '/pokemon',
+      path: '/tours/detail',
       name: 'DetailTour',
       component: DetailTour,
+      meta: { layout: UserLayout }
+    },
+    // ALL TOUR
+    {
+      path: '/tours',
+      name: 'Tours',
+      component: Tours,
       meta: { layout: UserLayout }
     },
     // HOME

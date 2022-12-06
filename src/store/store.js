@@ -4,6 +4,7 @@ import axios from 'axios';
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
+import router from '../router';
 
 
 
@@ -161,6 +162,7 @@ const store = createStore({
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         vuexContext.commit('SET_TOURS_SEARCHED', doc.data());
+        router.push('/tours')
       });
     }
 
