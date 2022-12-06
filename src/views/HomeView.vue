@@ -12,7 +12,7 @@
       <TourCard />
     </div>
     <Section2 />
-    <TopDescriptions />
+    <TopDescriptions class="mt-[120px]" />
   </div>
 </template>
 
