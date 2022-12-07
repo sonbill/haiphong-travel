@@ -15,7 +15,7 @@ const store = createStore({
     poke: null,
     hotels: null,
     tours: null,
-    toursSearched: null
+    toursSearched: []
   },
   getters: {
     token: state => state.token,
@@ -132,7 +132,6 @@ const store = createStore({
       let fbTours = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
         const tour = {
           id: doc.id,
           city: doc.data().city,
@@ -157,13 +156,32 @@ const store = createStore({
     },
     // SEARCH TOUR
     async searchTour(vuexContext, dataSearch) {
+      let fbTours = [];
+
       const q = query(collection(db, "tours"), where("country", "==", dataSearch.where));
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        vuexContext.commit('SET_TOURS_SEARCHED', doc.data());
-        router.push('/tours')
+        const searchedTours = {
+          id: doc.id,
+          city: doc.data().city,
+          continents: doc.data().continents,
+          country: doc.data().country,
+          description: doc.data().description,
+          image: doc.data().image,
+          price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(doc.data().price),
+          saleOff: doc.data().saleOff,
+          time: doc.data().time,
+          tourName: doc.data().tourName,
+          tourPlace: doc.data().tourPlace,
+          tourPlan: doc.data().tourPlan,
+          tourType: doc.data().tourType,
+          discount: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(doc.data().price) - ((parseFloat(doc.data().price) * doc.data().saleOff) / 100))
+        };
+        fbTours.push(searchedTours);
       });
+      vuexContext.commit('SET_TOURS_SEARCHED', fbTours);
+      router.push('/tours')
     }
 
   }

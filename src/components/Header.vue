@@ -12,14 +12,14 @@
         "
       >
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <a href="#">
-            <span class="sr-only">Your Company</span>
+          <router-link to="/">
+            <span class="sr-only">HP TRAVEL</span>
             <img
               class="h-8 w-auto sm:h-10"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt=""
             />
-          </a>
+          </router-link>
         </div>
         <div class="-my-2 -mr-2 md:hidden">
           <button
