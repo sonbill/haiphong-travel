@@ -16,7 +16,7 @@
             <span class="sr-only">HP TRAVEL</span>
             <img
               class="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+              src="../assets/img/cropped-Vision-Travel-icon.png"
               alt=""
             />
           </router-link>
