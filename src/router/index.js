@@ -8,6 +8,7 @@ import PageNotFound from '../components/PageNotFound.vue'
 import DetailTour from '../views/Tours/DetailTour.vue'
 import HotelsHomePage from '../views/Hotels/HotelsHomePage.vue'
 import Tours from '../views/Tours/Tours.vue'
+import AllTours from '../views/Tours/AllTours.vue'
 
 import UserLayout from '../layouts/UserLayout.vue'
 
@@ -32,9 +33,16 @@ const router = createRouter({
       component: DetailTour,
       meta: { layout: UserLayout }
     },
-    // ALL TOUR
+    // ALL TOURS
     {
       path: '/tours',
+      name: 'AllTours',
+      component: AllTours,
+      meta: { layout: UserLayout }
+    },
+    // SEARCH TOUR
+    {
+      path: '/searched',
       name: 'Tours',
       component: Tours,
       meta: { layout: UserLayout }

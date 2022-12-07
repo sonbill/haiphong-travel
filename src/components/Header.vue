@@ -458,10 +458,10 @@
             </div>
           </div>
           <!-- NAV ITEM - 3 -->
-          <a
-            href="#"
+          <router-link
+            :to="{ name: AllTours }"
             class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Tours</a
+            >Tours</router-link
           >
           <!-- NAV ITEM - 4 -->
           <router-link
