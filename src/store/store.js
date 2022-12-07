@@ -181,7 +181,7 @@ const store = createStore({
         fbTours.push(searchedTours);
       });
       vuexContext.commit('SET_TOURS_SEARCHED', fbTours);
-      router.push('/tours')
+      router.push('/searched')
     }
 
   }

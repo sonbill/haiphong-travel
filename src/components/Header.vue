@@ -459,7 +459,7 @@
           </div>
           <!-- NAV ITEM - 3 -->
           <router-link
-            :to="{ name: AllTours }"
+            :to="{ name: 'AllTours' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900"
             >Tours</router-link
           >

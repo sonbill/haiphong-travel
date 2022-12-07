@@ -15,7 +15,7 @@
         md:gap-4
         lg:gap-5
       "
-      v-if="tours"
+      v-if="tours !== null"
     >
       <div
         v-for="tour in tours"
@@ -137,11 +137,22 @@
             >
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-xl font-bold text-gray-900 dark:text-white">{{
-              tour.price
-            }}</span>
-            <a
-              href="#"
+            <div v-if="tour.saleOff" class="space-x-3">
+              <span class="text-xl font-bold text-gray-900 dark:text-white">
+                {{ tour.discount }}</span
+              >
+              <span class="line-through text-gray-700 text-medium">
+                {{ tour.price }}
+              </span>
+            </div>
+
+            <div v-else>
+              <span class="text-xl font-bold text-gray-900 dark:text-white">{{
+                tour.price
+              }}</span>
+            </div>
+            <router-link
+              to="#"
               class="
                 text-white
                 bg-blue-700
@@ -155,7 +166,7 @@
                 text-center
                 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
               "
-              >Book now</a
+              >Book now</router-link
             >
           </div>
         </div>
@@ -172,7 +183,7 @@ import { ref, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
-  name: "All Tours",
+  name: "AllTours",
   setup() {
     const store = useStore();
     onMounted(async () => {

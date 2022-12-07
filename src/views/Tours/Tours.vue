@@ -1,12 +1,22 @@
 <template>
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-0">
     <!-- TITLE -->
     <div class="my-10" v-if="tours">
       <h1 class="font-bold text-5xl">Tours</h1>
     </div>
     <h1 class="font-bold text-5xl" v-else>Search...</h1>
     <!-- ITEMS -->
-    <div class="grid grid-cols-3" v-if="tours">
+    <div
+      class="
+        grid grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-3
+        gap-3
+        md:gap-4
+        lg:gap-5
+      "
+      v-if="tours"
+    >
       <div
         v-for="tour in tours"
         :key="tour.id"
@@ -21,7 +31,7 @@
         "
       >
         <router-link :to="tour.id">
-          <div class="w-[384px] h-[240px]">
+          <div class="w-[384px] h-[220px]">
             <img
               class="rounded-t-lg w-full h-full object-cover"
               :src="tour.image"
@@ -127,11 +137,24 @@
             >
           </div>
           <div class="flex items-center justify-between">
-            <span class="text-3xl font-bold text-gray-900 dark:text-white">{{
+            <!-- <span class="text-3xl font-bold text-gray-900 dark:text-white">{{
               tour.price
-            }}</span>
-            <a
-              href="#"
+            }}</span> -->
+            <div v-if="tour.saleOff" class="space-x-3">
+              <span class="text-xl font-bold text-gray-900 dark:text-white">
+                {{ tour.discount }}</span
+              >
+              <span class="line-through text-gray-700 text-medium">
+                {{ tour.price }}
+              </span>
+            </div>
+            <div v-else>
+              <span class="text-xl font-bold text-gray-900 dark:text-white">{{
+                tour.price
+              }}</span>
+            </div>
+            <router-link
+              to="#"
               class="
                 text-white
                 bg-blue-700
@@ -145,7 +168,7 @@
                 text-center
                 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800
               "
-              >Book now</a
+              >Book now</router-link
             >
           </div>
         </div>
