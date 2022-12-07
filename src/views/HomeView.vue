@@ -14,6 +14,7 @@
     <Section2 />
     <TopDescriptions class="mt-[120px]" />
     <ChooseUs class="mt-[120px]" />
+    <SubscribeToNewsletter class="mt-[120px]" />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Section2 from "../components/Section2.vue";
 import Search from "../components/Search.vue";
 import TopDescriptions from "../components/TopDestinations.vue";
 import ChooseUs from "../components/ChooseUs.vue";
+import SubscribeToNewsletter from "../components/SubscribeToNewsletter.vue";
 export default {
   components: {
     Section1,
@@ -32,6 +34,7 @@ export default {
     TourCard,
     TopDescriptions,
     ChooseUs,
+    SubscribeToNewsletter,
   },
   name: "home",
   setup() {
