@@ -13,6 +13,7 @@
     </div>
     <Section2 />
     <TopDescriptions class="mt-[120px]" />
+    <ChooseUs class="mt-[120px]" />
   </div>
 </template>
 
@@ -22,8 +23,16 @@ import Section1 from "../components/Section1.vue";
 import Section2 from "../components/Section2.vue";
 import Search from "../components/Search.vue";
 import TopDescriptions from "../components/TopDestinations.vue";
+import ChooseUs from "../components/ChooseUs.vue";
 export default {
-  components: { Section1, Section2, Search, TourCard, TopDescriptions },
+  components: {
+    Section1,
+    Section2,
+    Search,
+    TourCard,
+    TopDescriptions,
+    ChooseUs,
+  },
   name: "home",
   setup() {
     return {};
