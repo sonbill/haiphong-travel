@@ -1,5 +1,5 @@
 <template>
-  <div class="px-60 mx-auto">
+  <div class="px-5 md:px-60 mx-auto">
     <!-- TITLE -->
     <div class="flex flex-col items-center space-y-5">
       <p class="text-md font-bold">CHOOSE YOUR EXPERIENCE!</p>
@@ -9,7 +9,7 @@
     <!-- GRID -->
     <div class="grid gap-4">
       <!-- ROW - 1 -->
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <!-- ITEM - 1 -->
         <div class="col-span-1">
           <div>
@@ -140,7 +140,7 @@
         </div>
       </div>
       <!-- ROW - 2 -->
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <!-- ITEM - 1 -->
         <div class="col-span-1">
           <div>

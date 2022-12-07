@@ -1,14 +1,23 @@
 <template>
   <div>
-    <h1 class="font-extrabold text-3xl text-center mb-20 subpixel-antialiased">
+    <h1
+      class="
+        px-10
+        md:px-0
+        font-extrabold
+        text-3xl text-center
+        mb-20
+        subpixel-antialiased
+      "
+    >
       Tại sao nên đặt chỗ tại Hải Phong Travel
     </h1>
-    <div class="grid grid-cols-4 gap-7 max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-7 max-w-5xl mx-auto">
       <!-- ITEM - 1 -->
-      <div class="row-span-1 flex flex-col justify-between">
+      <div class="px-10 md:px-0 row-span-1 flex flex-col justify-between">
         <!-- ITEM - ICON -->
         <div class="mb-4">
-          <div class="w-[200px] h-[200px]">
+          <div class="mx-auto w-[200px] h-[200px]">
             <img
               src="../assets/img/Charco - Travel International.png"
               alt=""
@@ -29,10 +38,10 @@
         </div>
       </div>
       <!-- ITEM - 2 -->
-      <div class="row-span-1 flex flex-col justify-between">
+      <div class="px-10 md:px-0 row-span-1 flex flex-col justify-between">
         <!-- ICON -->
         <div class="mb-4">
-          <div class="w-[200px] h-[200px]">
+          <div class="mx-auto w-[200px] h-[200px]">
             <img
               src="../assets/img/Charco - Mobile Life.png"
               alt=""
@@ -53,10 +62,10 @@
         </div>
       </div>
       <!-- ITEM - 3 -->
-      <div class="row-span-1 flex flex-col justify-between">
+      <div class="px-10 md:px-0 row-span-1 flex flex-col justify-between">
         <!-- ICON -->
         <div class="mb-4">
-          <div class="w-[200px] h-[200px]">
+          <div class="mx-auto w-[200px] h-[200px]">
             <img
               src="../assets/img/Charco - Security.png"
               alt=""
@@ -76,10 +85,10 @@
         </div>
       </div>
       <!-- ITEM - 4 -->
-      <div class="row-span-1 flex flex-col justify-between">
+      <div class="px-10 md:px-0 row-span-1 flex flex-col justify-between">
         <!-- ICON -->
         <div class="mb-4">
-          <div class="w-[200px] h-[200px]">
+          <div class="mx-auto w-[200px] h-[200px]">
             <img
               src="../assets/img/Charco - Inbox.png"
               alt=""
