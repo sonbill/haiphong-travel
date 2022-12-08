@@ -30,7 +30,7 @@
           dark:bg-gray-800 dark:border-gray-700
         "
       >
-        <router-link :to="tour.id">
+        <router-link :to="{ name: 'DetailTour', params: { tourID: tour.id } }">
           <div class="w-[384px] h-[220px]">
             <img
               class="rounded-t-lg w-full h-full object-cover"
@@ -42,7 +42,9 @@
         <div class="px-4 pb-4 mt-4">
           <div class="flex justify-between">
             <!-- ITEM - NAME -->
-            <router-link :to="tour.id">
+            <router-link
+              :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
+            >
               <h3
                 class="
                   text-gray-900
@@ -152,7 +154,7 @@
               }}</span>
             </div>
             <router-link
-              to="#"
+              :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
               class="
                 text-white
                 bg-blue-700

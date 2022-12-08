@@ -40,7 +40,7 @@
                     <option value="Canada">Canada</option>
                     <option value="Colombia">Colombia</option>
                     <option value="Costa Rica">Costa Rica</option>
-                    <option value="United States">United States</option>
+                    <option value="USA">United States</option>
                   </optgroup>
                   <optgroup label="Asia">
                     <option value="Thailand">Thailand</option>

@@ -154,7 +154,7 @@
               }}</span>
             </div>
             <router-link
-              to="#"
+              :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
               class="
                 text-white
                 bg-blue-700

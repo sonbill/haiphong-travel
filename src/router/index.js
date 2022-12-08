@@ -28,7 +28,7 @@ const router = createRouter({
     },
     // DETAIL TOUR
     {
-      path: '/tours/detail',
+      path: '/tours/:tourID',
       name: 'DetailTour',
       component: DetailTour,
       meta: { layout: UserLayout }

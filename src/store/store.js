@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import Cookies from "js-cookie";
 import axios from 'axios';
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
@@ -15,7 +15,8 @@ const store = createStore({
     poke: null,
     hotels: null,
     tours: null,
-    toursSearched: []
+    toursSearched: [],
+    tour: null
   },
   getters: {
     token: state => state.token,
@@ -23,6 +24,7 @@ const store = createStore({
     poke: state => state.poke,
     hotels: state => state.hotels,
     tours: state => state.tours,
+    tour: state => state.tour,
     toursSearched: state => state.toursSearched,
 
 
@@ -42,6 +44,9 @@ const store = createStore({
     },
     SET_TOURS(state, tours) {
       state.tours = tours;
+    },
+    SET_TOUR(state, tour) {
+      state.tour = tour;
     },
     SET_TOURS_SEARCHED(state, toursSearched) {
       state.toursSearched = toursSearched;
@@ -182,6 +187,34 @@ const store = createStore({
       });
       vuexContext.commit('SET_TOURS_SEARCHED', fbTours);
       router.push('/searched')
+    },
+    async getTour(vuexContext, tourID) {
+      const docRef = doc(db, "tours", tourID);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const docSnapFormat = {
+          id: docSnap.id,
+          city: docSnap.data().city,
+          continents: docSnap.data().continents,
+          country: docSnap.data().country,
+          description: docSnap.data().description,
+          image: docSnap.data().image,
+          price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(docSnap.data().price),
+          saleOff: docSnap.data().saleOff,
+          time: docSnap.data().time,
+          tourName: docSnap.data().tourName,
+          tourPlace: docSnap.data().tourPlace,
+          tourPlan: docSnap.data().tourPlan,
+          tourType: docSnap.data().tourType,
+          discount: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(docSnap.data().price) - ((parseFloat(docSnap.data().price) * docSnap.data().saleOff) / 100))
+        }
+        vuexContext.commit('SET_TOUR', docSnapFormat);
+
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
     }
 
   }
