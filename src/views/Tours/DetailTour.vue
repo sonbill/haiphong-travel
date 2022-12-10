@@ -47,7 +47,7 @@
                   :key="index"
                   class="font-bold"
                 >
-                  {{ type }},
+                  {{ type }}
                 </p>
               </div>
             </div>
@@ -130,23 +130,34 @@
     </div>
     <!-- IMAGE -->
     <div>
-      <!-- CURRENT SLIDE -->
-      <div class="w-full mt-5">
+      <!-- CURRENT SLIDE IMAGE -->
+      <div class="w-full my-10">
         <img
           :src="currentImg || tour.image"
           alt=""
           class="w-[837px] h-[540px] object-cover mx-auto rounded-sm"
         />
       </div>
-      <!-- SLIDE LOOP -->
+      <!-- SLIDE LOOP IMAGES -->
       <div>
         <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
-          <slide v-for="(img, index) in tour.image" :key="index">
+          <slide
+            v-for="(img, index) in tour.image"
+            :key="index"
+            class="mx-3 md:mx-0"
+          >
             <img
               :src="img"
-              @mouseover="changeActivePicture(img)"
+              @mouseover="changeActivePicture(img, index)"
               alt=""
-              class="w-[158px] h-[112px] object-cover rounded-sm"
+              class="
+                w-[158px]
+                h-[112px]
+                object-cover
+                rounded-sm
+                transition-all
+                hover:scale-125 hover:w-[w-200px] hover:h-[130px]
+              "
             />
           </slide>
         </carousel>
@@ -175,6 +186,7 @@ export default {
     const route = useRoute();
     const currentImg = ref(null);
     const tourID = computed(() => route.params.tourID);
+    const indexOfActive = ref(0);
 
     onMounted(() => {
       store.dispatch("getTour", tourID.value);
@@ -183,14 +195,16 @@ export default {
       return store.getters.tour;
     });
 
-    const changeActivePicture = (index) => {
-      currentImg.value = index;
+    const changeActivePicture = (img, index) => {
+      currentImg.value = img;
+      indexOfActive.value = index;
     };
 
     return {
       tour,
       currentImg,
       changeActivePicture,
+      indexOfActive,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
