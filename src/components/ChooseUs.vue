@@ -6,8 +6,8 @@
         md:grid-cols-2
         max-w-screen-2xl
         mx-auto
-        gap-5
-        md:gap-0
+        gap-7
+        md:gap-5
       "
     >
       <!-- COL 1 -->

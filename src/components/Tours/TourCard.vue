@@ -72,7 +72,7 @@
         <div class="absolute inset-x-0 bottom-5">
           <!-- BUTTON -->
           <router-link
-            :to="{ name: 'register' }"
+            :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
             class="
               text-white
               hover:text-white

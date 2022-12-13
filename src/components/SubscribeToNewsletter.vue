@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2">
     <!-- Sign Up for Our Newsletter -->
-    <div class="flex items-center justify-center col-span-1">
-      <div class="mx-auto w-full bg-orange-500 p-4">
+    <div class="col-span-1">
+      <div class="mx-auto w-full bg-orange-500 p-5">
         <div class="grid gap-5 md:grid-cols-2 md:gap-10 lg:gap-20">
           <div class="flex justify-center md:justify-end">
             <img
@@ -59,7 +59,7 @@
     </div>
     <!-- Customer Support -->
     <div class="col-span-1 bg-[#fb923c]">
-      <div class="p-5 md:p-16 flex justify-between items-center space-x-5">
+      <div class="p-5 md:p-10 flex justify-between items-center space-x-5">
         <!-- CONTENT - 1 -->
         <div class="space-y-5">
           <h1 class="font-bold text-3xl text-white">24/7 Customer Support</h1>
