@@ -163,6 +163,72 @@
         </carousel>
       </div>
     </div>
+    <!-- DETAIL TOUR INFORMATION -->
+    <div>
+      <!-- DETAIL TOUR INFOR BUTTONS -->
+      <div class="flex space-x-5">
+        <button
+          @click="toggleIsOverview"
+          type="button"
+          class="
+            focus:bg-red-500
+            hover:border hover:bg-red-400
+            border-dashed
+            p-3
+          "
+        >
+          Overview
+        </button>
+        <button
+          @click="toggleIsTourPlan"
+          type="button"
+          class="
+            focus:bg-red-500
+            hover:border hover:bg-red-400
+            border-dashed
+            p-3
+          "
+        >
+          Tour Plan
+        </button>
+        <button
+          @click="toggleIsReviews"
+          type="button"
+          class="
+            focus:bg-red-500
+            hover:border hover:bg-red-400
+            border-dashed
+            p-3
+          "
+        >
+          Reviews
+        </button>
+      </div>
+      <!-- DETAIL TOUR INFORMATION -->
+      <div>
+        <!-- OVERVIEW -->
+        <div v-show="isOverview">
+          <p>{{ tour.description }}</p>
+        </div>
+        <!-- TOUR PLAN -->
+        <div v-show="isTourplan">
+          <ul>
+            <li>DAY</li>
+          </ul>
+        </div>
+        <!-- REVIEWS -->
+        <div v-show="isReviews">
+          <p>5 sao</p>
+        </div>
+        <div>
+          <iframe
+            v-show="isShowing"
+            src="http://www.weather.gov/"
+            frameborder="0"
+          ></iframe>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -187,10 +253,14 @@ export default {
     const currentImg = ref(null);
     const tourID = computed(() => route.params.tourID);
     const indexOfActive = ref(0);
+    const isOverview = ref(true);
+    const isTourplan = ref(false);
+    const isReviews = ref(false);
 
     onMounted(() => {
       store.dispatch("getTour", tourID.value);
     });
+
     const tour = computed(() => {
       return store.getters.tour;
     });
@@ -199,12 +269,42 @@ export default {
       currentImg.value = img;
       indexOfActive.value = index;
     };
+    const toggleIsOverview = () => {
+      if (isOverview.value == false) {
+        isTourplan.value = true;
+        isReviews.value = true;
+      } else if (isOverview.value == true) {
+        isOverview.value = false;
+      }
+    };
+    const toggleIsTourPlan = () => {
+      if (isTourplan.value == true) {
+        isOverview.value = false;
+        isReviews.value = false;
+      } else if (isTourplan.value == false) {
+        isTourplan.value = true;
+      }
+    };
+    const toggleIsReviews = () => {
+      if (isReviews.value == true) {
+        isOverview.value = false;
+        isTourplan.value = false;
+      } else if (isReviews.value == false) {
+        isReviews.value = true;
+      }
+    };
 
     return {
       tour,
       currentImg,
       changeActivePicture,
       indexOfActive,
+      isOverview,
+      isTourplan,
+      isReviews,
+      toggleIsTourPlan,
+      toggleIsOverview,
+      toggleIsReviews,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
