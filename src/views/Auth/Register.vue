@@ -37,7 +37,7 @@
           <input type="hidden" name="remember" value="true" />
           <div class="-space-y-px rounded-md shadow-sm">
             <!-- NAME -->
-            <div>
+            <!-- <div>
               <label for="name" class="sr-only">Name</label>
               <input
                 v-model="registerForm.name"
@@ -64,7 +64,7 @@
                 "
                 placeholder="Name"
               />
-            </div>
+            </div> -->
             <!-- EMAIL -->
             <div>
               <label for="email-address" class="sr-only">Email address</label>
@@ -80,7 +80,7 @@
                   block
                   w-full
                   appearance-none
-                  rounded-none
+                  rounded-t-md
                   border border-gray-300
                   px-3
                   py-2
@@ -110,7 +110,7 @@
                   block
                   w-full
                   appearance-none
-                  rounded-none
+                  rounded-b-md
                   border border-gray-300
                   px-3
                   py-2
@@ -126,7 +126,7 @@
               />
             </div>
             <!-- CONFIRM PASSWORD -->
-            <div>
+            <!-- <div>
               <label for="password-confirmation" class="sr-only"
                 >Password Confirmation</label
               >
@@ -155,7 +155,7 @@
                 "
                 placeholder="Confirm Password"
               />
-            </div>
+            </div> -->
           </div>
           <!-- BUTTON SUBMIT -->
           <div>
@@ -227,17 +227,15 @@ export default {
 
   setup() {
     const registerForm = reactive({
-      name: "",
       email: "",
       password: "",
-      password_confirmation: "",
     });
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
 
     const register = async () => {
-      await store.dispatch("authenticate", registerForm).then(() => {
+      await store.dispatch("register", registerForm).then(() => {
         router.push({
           name: "login",
           query: {

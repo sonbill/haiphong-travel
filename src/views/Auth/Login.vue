@@ -193,13 +193,13 @@ export default {
   components: { LoginOrSigninLayout },
   name: "login",
   setup() {
-    const loginForm = reactive({ email: "", password: "", isLogin: true });
+    const loginForm = reactive({ email: "", password: "" });
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
 
-    const login = async () => {
-      await store.dispatch("authenticate", loginForm).then(() => {
+    const login = () => {
+      store.dispatch("login", loginForm).then(() => {
         router.push({
           name: "home",
           query: {

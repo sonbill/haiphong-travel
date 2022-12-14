@@ -81,23 +81,23 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: { auth: false },
-      beforeEnter: (async (to, from, next) => {
-        const token = await store.getters['token']
-        if (token && to.meta.auth === false) next({ name: 'home' })
-        next();
-      })
+      // meta: { auth: false },
+      // beforeEnter: (async (to, from, next) => {
+      //   const token = await store.getters['token']
+      //   if (token && to.meta.auth === false) next({ name: 'home' })
+      //   next();
+      // })
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
-      meta: { auth: false },
-      beforeEnter: (async (to, from, next) => {
-        const token = await store.getters['token']
-        if (token && to.meta.auth === false) next({ name: 'home' })
-        next();
-      })
+      // meta: { auth: false },
+      // beforeEnter: (async (to, from, next) => {
+      //   const token = await store.getters['token']
+      //   if (token && to.meta.auth === false) next({ name: 'home' })
+      //   next();
+      // })
     },
     {
       path: '/:pathMatch(.*)*',

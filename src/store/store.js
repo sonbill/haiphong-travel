@@ -1,20 +1,18 @@
 import { createStore } from 'vuex';
-import Cookies from "js-cookie";
 import axios from 'axios';
 import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
-// import router from '../router';
-import { useRouter, useRoute } from "vue-router";
+import router from '../router';
+import { auth } from '../firebase/index'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-const router = useRouter()
 
 
 
 
 const store = createStore({
   state: {
-    token: Cookies.get('access_token') || '',
     user: null,
     poke: null,
     hotels: null,
@@ -42,8 +40,8 @@ const store = createStore({
     SET_USER(state, user) {
       state.user = user
     },
-    SET_POKE(state, poke) {
-      state.poke = poke;
+    CLEAR_USER(state) {
+      state.user = null;
     },
     SET_HOTELS(state, hotels) {
       state.hotels = hotels;
@@ -62,32 +60,92 @@ const store = createStore({
     },
   },
   actions: {
-    async authenticate(vuexContext, credentials) {
-      return new Promise((resolve, reject) => {
-        // check login or register
-        let authUrlApi = "login"
-        if (!credentials.isLogin) {
-          authUrlApi = "register"
+    // async authenticate(vuexContext, credentials) {
+    //   return new Promise((resolve, reject) => {
+    //     // check login or register
+    //     let authUrlApi = "login"
+    //     if (!credentials.isLogin) {
+    //       authUrlApi = "register"
+    //     }
+    //     return axios.post(authUrlApi, credentials)
+    //       .then((response) => {
+    //         const token = response.data.access_token
+    //         if (token) {
+    //           Cookies.set(
+    //             "access_token",
+    //             JSON.stringify(token), { expires: 1 }
+    //           );
+    //           vuexContext.commit('SET_TOKEN', token)
+    //           vuexContext.dispatch('getUser')
+    //         }
+    //         resolve(response)
+    //         console.log(response)
+    //       }).catch((error) => {
+    //         // vuexContext.commit("SET_ERRORS", error.response.data);
+    //         console.log(error.response.data)
+    //       });
+    //   })
+    // },
+    async login(vuexContext, credentials) {
+      const { email, password } = credentials;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            alert('User not found');
+            break
+          case 'auth/wrong-password':
+            alert('Wrong password');
+            break
+          default:
+            alert(error.message);
         }
-        return axios.post(authUrlApi, credentials)
-          .then((response) => {
-            const token = response.data.access_token
-            if (token) {
-              Cookies.set(
-                "access_token",
-                JSON.stringify(token), { expires: 1 }
-              );
-              vuexContext.commit('SET_TOKEN', token)
-              vuexContext.dispatch('getUser')
-            }
-            resolve(response)
-            console.log(response)
-          }).catch((error) => {
-            // vuexContext.commit("SET_ERRORS", error.response.data);
-            console.log(error.response.data)
-          });
-      })
+        return
+      }
+
+      vuexContext.commit('SET_USER', auth.currentUser)
+
+      router.push('/')
     },
+    async register(vuexContext, credentials) {
+      const { email, password } = credentials;
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            alert('Email already in use');
+            break
+          case 'auth/invalid-email':
+            alert('Invalid email');
+            break
+          case 'auth/operation-not-allowed':
+            alert('Operation not allowed');
+            break
+          case 'auth/weak-password':
+            alert('Weak password');
+            break
+          default:
+            alert(error.message);
+        }
+        return
+      }
+
+      vuexContext.commit('SET_USER', auth.currentUser)
+
+      router.push('/')
+    },
+    async logout(vuexContext) {
+      await signOut(auth)
+
+      vuexContext.commit('CLEAR_USER')
+
+      router.push('/')
+    },
+
     async getUser(vuexContext) {
       return new Promise((resolve, reject) => {
         const accessToken = JSON.parse(Cookies.get("access_token"));
