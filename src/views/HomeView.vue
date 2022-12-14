@@ -15,7 +15,6 @@
     <TopDescriptions class="mt-[150px]" />
     <ChooseUs class="mt-[150px]" />
     <SubscribeToNewsletter class="mt-[150px]" />
-    <Footer class="mt-[150px]" />
   </div>
 </template>
 
@@ -27,7 +26,6 @@ import Search from "../components/Search.vue";
 import TopDescriptions from "../components/TopDestinations.vue";
 import ChooseUs from "../components/ChooseUs.vue";
 import SubscribeToNewsletter from "../components/SubscribeToNewsletter.vue";
-import Footer from "../components/Footer.vue";
 export default {
   components: {
     Section1,
@@ -37,7 +35,6 @@ export default {
     TopDescriptions,
     ChooseUs,
     SubscribeToNewsletter,
-    Footer,
   },
   name: "home",
   setup() {

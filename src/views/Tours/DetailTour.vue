@@ -140,7 +140,7 @@
       </div>
       <!-- SLIDE LOOP IMAGES -->
       <div class="h-[150px]">
-        <carousel :items-to-show="1" class="max-w-2xl mx-auto py-5">
+        <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
           <slide
             v-for="(img, index) in tour.image"
             :key="index"
@@ -179,7 +179,7 @@
               :key="plan.id"
               class="list-inside"
             >
-              <li class="font-bold text-xl list-disc mb-3">{{ plan }}</li>
+              <li class="font-bold text-lg list-disc mb-3">{{ plan }}</li>
             </ul>
           </Tab>
           <Tab title="Reviews">5 sao</Tab>
@@ -194,12 +194,74 @@
         ></iframe>
       </div> -->
     </div>
+    <!-- HIGHLIGHTS -->
+    <div
+      class="
+        grid grid-cols-1
+        gap-5
+        md:gap-0 md:grid-cols-2
+        bg-[#f1f5f9]
+        p-10
+        rounded-md
+        max-w-4xl
+        mx-auto
+        mt-16
+      "
+    >
+      <!-- IMG -->
+      <div class="flex items-center justify-center">
+        <img src="../../../src/assets/img/img_single_tour_1.webp" alt="" />
+      </div>
+      <!-- CONTENT -->
+      <div>
+        <h1 class="text-2xl mb-5">Highlights</h1>
+        <div>
+          <ul class="space-y-3">
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500">Nepal most popular climb.</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500"
+                >Outstanding views of Mt. Everest, Mt. Lhotse, Mt. Makalu from
+                the summit.</span
+              >
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500"
+                >The perfect experience for adventurers!</span
+              >
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500"
+                >5-day Prince Edward Island trip from Halifax</span
+              >
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500"
+                >Explore scenic Prince Edward Island National Park</span
+              >
+            </li>
+            <li class="flex items-center space-x-3">
+              <span class="material-icons text-green-700"> done </span>
+              <span class="text-gray-500">
+                Overnight accommodation and all transport included</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <!-- ALSO LIKE / RECOMMENDED -->
     <div>
-      <h1 class="text-3xl my-10">You May Also Like</h1>
+      <h1 class="text-3xl mt-24 mb-10">You May Also Like</h1>
       <div>
         <carousel
-          class="flex space-x-5 max-h-96 w-full"
+          class="flex space-x-5 max-h-72 w-full"
           :autoplay="5000"
           :breakpoints="breakpoints"
           :wrap-around="true"

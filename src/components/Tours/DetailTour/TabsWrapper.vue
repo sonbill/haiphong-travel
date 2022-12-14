@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[300px] space-y-10">
+  <div class="max-h-[400px] space-y-10">
     <div class="flex space-x-5">
       <button
         v-for="title in tabTitles"
