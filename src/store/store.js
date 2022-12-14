@@ -16,7 +16,8 @@ const store = createStore({
     hotels: null,
     tours: null,
     toursSearched: [],
-    tour: null
+    tour: null,
+    recommended: null,
   },
   getters: {
     token: state => state.token,
@@ -26,6 +27,7 @@ const store = createStore({
     tours: state => state.tours,
     tour: state => state.tour,
     toursSearched: state => state.toursSearched,
+    recommended: state => state.recommended,
 
 
   },
@@ -50,6 +52,9 @@ const store = createStore({
     },
     SET_TOURS_SEARCHED(state, toursSearched) {
       state.toursSearched = toursSearched;
+    },
+    SET_RECOMMENDED(state, recommended) {
+      state.recommended = recommended;
     },
   },
   actions: {
@@ -215,7 +220,34 @@ const store = createStore({
         // doc.data() will be undefined in this case
         console.log("No such document!");
       }
-    }
+    },
+    async recommended(vuexContext, tourCountry) {
+      let fbTours = [];
+
+      const q = query(collection(db, "tours"), where("country", "==", tourCountry));
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const recommendedTour = {
+          id: doc.id,
+          city: doc.data().city,
+          continents: doc.data().continents,
+          country: doc.data().country,
+          description: doc.data().description,
+          image: doc.data().image,
+          price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(doc.data().price),
+          saleOff: doc.data().saleOff,
+          time: doc.data().time,
+          tourName: doc.data().tourName,
+          tourPlace: doc.data().tourPlace,
+          tourPlan: doc.data().tourPlan,
+          tourType: doc.data().tourType,
+          discount: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(doc.data().price) - ((parseFloat(doc.data().price) * doc.data().saleOff) / 100))
+        };
+        fbTours.push(recommendedTour);
+      });
+      vuexContext.commit('SET_RECOMMENDED', fbTours);
+    },
 
   }
 })

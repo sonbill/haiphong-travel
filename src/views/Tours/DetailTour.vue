@@ -140,7 +140,7 @@
       </div>
       <!-- SLIDE LOOP IMAGES -->
       <div class="h-[150px]">
-        <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
+        <carousel :items-to-show="1" class="max-w-2xl mx-auto py-5">
           <slide
             v-for="(img, index) in tour.image"
             :key="index"
@@ -194,6 +194,119 @@
         ></iframe>
       </div> -->
     </div>
+    <!-- ALSO LIKE / RECOMMENDED -->
+    <div>
+      <h1 class="text-3xl my-10">You May Also Like</h1>
+      <div>
+        <carousel
+          class="flex space-x-5 max-h-96 w-full"
+          :autoplay="5000"
+          :breakpoints="breakpoints"
+          :wrap-around="true"
+        >
+          <slide
+            v-for="(tour, index) in recommendedTours"
+            :key="index"
+            class="relative w-full mx-0 md:mx-5"
+          >
+            <!-- CARD - IMG -->
+            <div class="rounded overflow-hidden shadow-lg w-full h-72">
+              <img
+                :src="tour.image"
+                alt=""
+                class="relative w-full h-full object-cover px-5 md:px-0"
+              />
+            </div>
+            <!-- OVERLAY -->
+            <div
+              class="
+                absolute
+                top-0
+                right-0
+                bottom-0
+                left-0
+                bg-gradient-to-b
+                from-transparent
+                to-zinc-800
+              "
+            ></div>
+            <!-- CARD - TEXT -->
+            <div
+              class="
+                absolute
+                w-full
+                h-full
+                space-y-5
+                flex flex-col
+                z-10
+                top-0
+                p-10
+              "
+            >
+              <!-- ITEM - TEXT - TOP -->
+              <div class="flex justify-end">
+                <div v-if="tour.saleOff" class="flex space-x-3">
+                  <p class="space-x-2">
+                    <span class="text-gray-100 text-medium">From</span>
+                    <span class="font-extrabold text-white">
+                      {{ tour.discount }}</span
+                    >
+                    <span class="line-through text-gray-100 text-medium">{{
+                      tour.price
+                    }}</span>
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="text-white font-medium">
+                    From <span class="font-extrabold">{{ tour.price }}</span>
+                  </p>
+                </div>
+              </div>
+              <!-- ITEM - TEXT - BOTTOM -->
+              <div class="text-white space-y-3 text-left">
+                <div class="flex items-center">
+                  <span class="material-icons"> location_on </span>
+                  <p class="text-sm font-bold text-gray-100">
+                    {{ tour.tourPlace }}
+                  </p>
+                </div>
+                <h3 class="text-2xl font-extrabold">{{ tour.tourName }}</h3>
+                <div class="flex items-center space-x-2">
+                  <span class="material-icons"> schedule </span>
+                  <p>{{ tour.time }} days</p>
+                </div>
+              </div>
+              <!-- ITEM - BUTTON LINK -->
+              <div class="absolute inset-x-0 bottom-5">
+                <!-- BUTTON -->
+                <router-link
+                  :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
+                  class="
+                    text-white
+                    hover:text-white
+                    border border-white
+                    hover:border-[#fb923c] hover:bg-[#f97316]
+                    focus:ring-4 focus:outline-none focus:ring-[#f97316]
+                    font-medium
+                    rounded-lg
+                    text-sm
+                    px-5
+                    py-2.5
+                    text-center
+                    dark:border-yellow-300
+                    dark:text-yellow-300
+                    dark:hover:text-white
+                    dark:hover:bg-yellow-400
+                  "
+                >
+                  More information
+                </router-link>
+              </div>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -222,13 +335,18 @@ export default {
     const currentImg = ref(null);
     const tourID = computed(() => route.params.tourID);
     const indexOfActive = ref(0);
+    const tourCountry = computed(() => store.getters.tour.country);
 
-    onMounted(() => {
-      store.dispatch("getTour", tourID.value);
+    onMounted(async () => {
+      await store.dispatch("getTour", tourID.value);
+      await store.dispatch("recommended", tourCountry.value);
     });
-
     const tour = computed(() => {
       return store.getters.tour;
+    });
+
+    const recommendedTours = computed(() => {
+      return store.getters.recommended;
     });
 
     const changeActivePicture = (img, index) => {
@@ -236,11 +354,26 @@ export default {
       indexOfActive.value = index;
     };
 
+    const breakpoints = {
+      // 700px and up
+      800: {
+        itemsToShow: 1,
+        snapAlign: "center",
+      },
+      // 1024 and up
+      1024: {
+        itemsToShow: 3,
+        snapAlign: "start",
+      },
+    };
+
     return {
       tour,
       currentImg,
       changeActivePicture,
       indexOfActive,
+      recommendedTours,
+      breakpoints,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
