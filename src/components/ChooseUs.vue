@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10 md:p-20 bg-[#f6f8fb]">
+  <div class="p-5 md:p-10 bg-[#f6f8fb]">
     <div
       class="
         grid grid-cols-1
@@ -7,12 +7,12 @@
         max-w-screen-2xl
         mx-auto
         gap-7
-        md:gap-5
+        md:gap-10
       "
     >
       <!-- COL 1 -->
       <div class="col-span-1">
-        <div class="max-w-[540px] md:max-w-[680px] rounded-md">
+        <div class="max-w-[540px] md:max-w-[680px] rounded-md p-5">
           <img
             src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
             alt=""
@@ -29,10 +29,12 @@
             Our Experiences Meet High Quality Standards
           </h1>
           <div class="flex space-x-10">
-            <p>----------------------------------------</p>
+            <p class="border"></p>
             <p class="max-w-2xl italic text-zinc-500 text-md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-              tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+              "A knowledgeable travel agent will make personalized
+              recommendations and offer tips on destinations, what to see and do
+              while on vacation, the best and worst times to travel, and much
+              more".
             </p>
           </div>
         </div>

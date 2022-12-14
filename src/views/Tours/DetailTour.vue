@@ -30,7 +30,7 @@
           <div class="col-span-1">
             <div class="flex flex-col px-5 py-2">
               <span class="text-zinc-500">From</span>
-              <span class="font-bold">{{ tour.time }}</span>
+              <span class="font-bold"> {{ tour.time }} days </span>
             </div>
           </div>
         </div>
@@ -57,7 +57,7 @@
           <div class="col-span-1">
             <div class="px-5 py-2">
               <span class="text-zinc-500">Reviews</span>
-              <div class="flex items-center mt-2.5 mb-5">
+              <div class="flex items-center">
                 <svg
                   class="w-5 h-5 text-yellow-300"
                   fill="currentColor"
@@ -139,7 +139,7 @@
         />
       </div>
       <!-- SLIDE LOOP IMAGES -->
-      <div>
+      <div class="h-[150px]">
         <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
           <slide
             v-for="(img, index) in tour.image"
@@ -164,75 +164,42 @@
       </div>
     </div>
     <!-- DETAIL TOUR INFORMATION -->
-    <div>
-      <!-- DETAIL TOUR INFOR BUTTONS -->
+    <div class="mt-10">
+      <!-- DETAIL TOUR INFORMATION TABS WRAPPER -->
       <div class="flex space-x-5">
-        <button
-          @click="toggleIsOverview"
-          type="button"
-          class="
-            focus:bg-red-500
-            hover:border hover:bg-red-400
-            border-dashed
-            p-3
-          "
-        >
-          Overview
-        </button>
-        <button
-          @click="toggleIsTourPlan"
-          type="button"
-          class="
-            focus:bg-red-500
-            hover:border hover:bg-red-400
-            border-dashed
-            p-3
-          "
-        >
-          Tour Plan
-        </button>
-        <button
-          @click="toggleIsReviews"
-          type="button"
-          class="
-            focus:bg-red-500
-            hover:border hover:bg-red-400
-            border-dashed
-            p-3
-          "
-        >
-          Reviews
-        </button>
+        <TabsWrapper>
+          <Tab title="Overview">
+            <span class="block text-xl mb-3">DESCRIPTION</span>
+            <p class="text-gray-500 text-md">{{ tour.description }}</p>
+          </Tab>
+          <Tab title="Tour Plan">
+            <p class="text-xl mb-3">TOUR PLAN</p>
+            <ul
+              v-for="plan in tour.tourPlan"
+              :key="plan.id"
+              class="list-inside"
+            >
+              <li class="font-bold text-xl list-disc mb-3">{{ plan }}</li>
+            </ul>
+          </Tab>
+          <Tab title="Reviews">5 sao</Tab>
+        </TabsWrapper>
       </div>
-      <!-- DETAIL TOUR INFORMATION -->
-      <div>
-        <!-- OVERVIEW -->
-        <div v-show="isOverview">
-          <p>{{ tour.description }}</p>
-        </div>
-        <!-- TOUR PLAN -->
-        <div v-show="isTourplan">
-          <ul>
-            <li>DAY</li>
-          </ul>
-        </div>
-        <!-- REVIEWS -->
-        <div v-show="isReviews">
-          <p>5 sao</p>
-        </div>
-        <div>
-          <iframe
-            v-show="isShowing"
-            src="http://www.weather.gov/"
-            frameborder="0"
-          ></iframe>
-        </div>
-      </div>
+
+      <!-- <div>
+        <iframe
+          v-show="isShowing"
+          src="http://www.weather.gov/"
+          frameborder="0"
+        ></iframe>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import TabsWrapper from "../../components/Tours/DetailTour/TabsWrapper.vue";
+import Tab from "../../components/Tours/DetailTour/Tab.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import axios from "axios";
 import { ref, onMounted, computed } from "vue";
@@ -245,6 +212,8 @@ export default {
     Slide,
     Pagination,
     Navigation,
+    Tab,
+    TabsWrapper,
   },
 
   setup() {
@@ -253,9 +222,6 @@ export default {
     const currentImg = ref(null);
     const tourID = computed(() => route.params.tourID);
     const indexOfActive = ref(0);
-    const isOverview = ref(true);
-    const isTourplan = ref(false);
-    const isReviews = ref(false);
 
     onMounted(() => {
       store.dispatch("getTour", tourID.value);
@@ -269,42 +235,12 @@ export default {
       currentImg.value = img;
       indexOfActive.value = index;
     };
-    const toggleIsOverview = () => {
-      if (isOverview.value == false) {
-        isTourplan.value = true;
-        isReviews.value = true;
-      } else if (isOverview.value == true) {
-        isOverview.value = false;
-      }
-    };
-    const toggleIsTourPlan = () => {
-      if (isTourplan.value == true) {
-        isOverview.value = false;
-        isReviews.value = false;
-      } else if (isTourplan.value == false) {
-        isTourplan.value = true;
-      }
-    };
-    const toggleIsReviews = () => {
-      if (isReviews.value == true) {
-        isOverview.value = false;
-        isTourplan.value = false;
-      } else if (isReviews.value == false) {
-        isReviews.value = true;
-      }
-    };
 
     return {
       tour,
       currentImg,
       changeActivePicture,
       indexOfActive,
-      isOverview,
-      isTourplan,
-      isReviews,
-      toggleIsTourPlan,
-      toggleIsOverview,
-      toggleIsReviews,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
