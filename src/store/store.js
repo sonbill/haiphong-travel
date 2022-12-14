@@ -4,7 +4,11 @@ import axios from 'axios';
 import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
-import router from '../router';
+// import router from '../router';
+import { useRouter, useRoute } from "vue-router";
+
+const router = useRouter()
+
 
 
 

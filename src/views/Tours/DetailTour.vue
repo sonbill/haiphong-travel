@@ -341,8 +341,8 @@
               <!-- ITEM - BUTTON LINK -->
               <div class="absolute inset-x-0 bottom-5">
                 <!-- BUTTON -->
-                <router-link
-                  :to="{ name: 'DetailTour', params: { tourID: tour.id } }"
+                <a
+                  :href="$router.resolve({ name: 'DetailTour', params: { tourID: tour.id } }).href"
                   class="
                     text-white
                     hover:text-white
@@ -362,7 +362,7 @@
                   "
                 >
                   More information
-                </router-link>
+                </a>
               </div>
             </div>
           </slide>
@@ -403,6 +403,7 @@ export default {
       await store.dispatch("getTour", tourID.value);
       await store.dispatch("recommended", tourCountry.value);
     });
+
     const tour = computed(() => {
       return store.getters.tour;
     });
