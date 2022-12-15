@@ -145,59 +145,73 @@ const store = createStore({
 
       router.push('/')
     },
+    async fetchUser(vuexContext) {
+      auth.onAuthStateChanged(async user => {
+        if (user === null) {
+          vuexContext.commit('CLEAR_USER')
+        } else {
 
-    async getUser(vuexContext) {
-      return new Promise((resolve, reject) => {
-        const accessToken = JSON.parse(Cookies.get("access_token"));
-        if (accessToken) {
-          axios.get("user", {
-            headers: { Authorization: `Bearer ${accessToken}` },
-          })
-            .then((response) => {
-              vuexContext.commit('SET_USER', response.data);
-              resolve(response.data)
-            })
-            .catch((error) => {
-              // reject(vuexContext.commit("SET_ERRORS", error.response.data));
-            });
+          vuexContext.commit('SET_USER', user)
+
+          if (router.isReady() && router.currentRoute.value.path === '/login') {
+            router.push('/')
+          }
         }
       })
     },
-    async getPoke(vuexContext) {
-      return new Promise((resolve, reject) => {
-        axios.get("https://pokeapi.co/api/v2/pokemon/pikachu")
-          .then((response) => {
-            console.log(response.data);
-            vuexContext.commit('SET_POKE', response.data);
-            resolve(response.data)
-          })
-          .catch((error) => {
-            // reject(vuexContext.commit("SET_ERRORS", error.response.data));
-          });
-      })
-    },
-    async getHotels(vuexContext, hotels) {
-      return new Promise((resolve, reject) => {
-        const options = {
-          method: 'GET',
-          url: 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation',
-          params: { query: hotels },
-          headers: {
-            'X-RapidAPI-Key': 'e491b38cdamshe2872c263d7a4bdp10d663jsn67d754324127',
-            'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
-          }
-        };
-        axios.request(options)
-          .then((response) => {
-            console.log(response);
-            vuexContext.commit('SET_HOTELS', response.data);
-            resolve(response.data)
-          })
-          .catch((error) => {
-            // reject(vuexContext.commit("SET_ERRORS", error.response.data));
-          });
-      })
-    },
+
+    // async getUser(vuexContext) {
+    //   return new Promise((resolve, reject) => {
+    //     const accessToken = JSON.parse(Cookies.get("access_token"));
+    //     if (accessToken) {
+    //       axios.get("user", {
+    //         headers: { Authorization: `Bearer ${accessToken}` },
+    //       })
+    //         .then((response) => {
+    //           vuexContext.commit('SET_USER', response.data);
+    //           resolve(response.data)
+    //         })
+    //         .catch((error) => {
+    //           // reject(vuexContext.commit("SET_ERRORS", error.response.data));
+    //         });
+    //     }
+    //   })
+    // },
+    // async getPoke(vuexContext) {
+    //   return new Promise((resolve, reject) => {
+    //     axios.get("https://pokeapi.co/api/v2/pokemon/pikachu")
+    //       .then((response) => {
+    //         console.log(response.data);
+    //         vuexContext.commit('SET_POKE', response.data);
+    //         resolve(response.data)
+    //       })
+    //       .catch((error) => {
+    //         // reject(vuexContext.commit("SET_ERRORS", error.response.data));
+    //       });
+    //   })
+    // },
+    // async getHotels(vuexContext, hotels) {
+    //   return new Promise((resolve, reject) => {
+    //     const options = {
+    //       method: 'GET',
+    //       url: 'https://tripadvisor16.p.rapidapi.com/api/v1/hotels/searchLocation',
+    //       params: { query: hotels },
+    //       headers: {
+    //         'X-RapidAPI-Key': 'e491b38cdamshe2872c263d7a4bdp10d663jsn67d754324127',
+    //         'X-RapidAPI-Host': 'tripadvisor16.p.rapidapi.com'
+    //       }
+    //     };
+    //     axios.request(options)
+    //       .then((response) => {
+    //         console.log(response);
+    //         vuexContext.commit('SET_HOTELS', response.data);
+    //         resolve(response.data)
+    //       })
+    //       .catch((error) => {
+    //         // reject(vuexContext.commit("SET_ERRORS", error.response.data));
+    //       });
+    //   })
+    // },
     // GET TOUR
     async getTours(vuexContext) {
       const querySnapshot = await getDocs(collection(db, "tours"));

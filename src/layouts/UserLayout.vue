@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-between">
     <Header />
+    <!-- CONTENT -->
     <div>
       <slot />
     </div>
+    <Footer class="mt-[150px]" />
   </div>
-  <Footer class="mt-[150px]" />
 </template>
 
 <script>

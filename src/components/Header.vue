@@ -471,38 +471,80 @@
           >
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <router-link
-            :to="{ name: 'login' }"
-            class="
-              whitespace-nowrap
-              text-base
-              font-medium
-              text-gray-500
-              hover:text-gray-900
-            "
-            >Sign in</router-link
-          >
-          <router-link
-            :to="{ name: 'register' }"
-            class="
-              ml-8
-              inline-flex
-              items-center
-              justify-center
-              whitespace-nowrap
-              rounded-md
-              border border-transparent
-              bg-[#fb923c]
-              px-4
-              py-2
-              text-base
-              font-medium
-              text-white
-              shadow-sm
-              hover:bg-[#f97316]
-            "
-            >Sign up</router-link
-          >
+          <!-- NOT AUTH -->
+          <div v-if="user">
+            <!-- PROFILE -->
+            <router-link
+              :to="{ name: 'UserProfile' }"
+              class="
+                whitespace-nowrap
+                text-base
+                font-medium
+                text-gray-500
+                hover:text-gray-900
+              "
+            >
+              Profile
+            </router-link>
+            <!-- LOGOUT -->
+            <button
+              @click="logout"
+              class="
+                ml-8
+                inline-flex
+                items-center
+                justify-center
+                whitespace-nowrap
+                rounded-md
+                border border-transparent
+                bg-[#fb923c]
+                px-4
+                py-2
+                text-base
+                font-medium
+                text-white
+                shadow-sm
+                hover:bg-[#f97316]
+              "
+            >
+              Logout
+            </button>
+          </div>
+          <!-- AUTH -->
+          <div v-else>
+            <router-link
+              :to="{ name: 'login' }"
+              class="
+                whitespace-nowrap
+                text-base
+                font-medium
+                text-gray-500
+                hover:text-gray-900
+              "
+              >Sign in</router-link
+            >
+            <router-link
+              :to="{ name: 'register' }"
+              class="
+                ml-8
+                inline-flex
+                items-center
+                justify-center
+                whitespace-nowrap
+                rounded-md
+                border border-transparent
+                bg-[#fb923c]
+                px-4
+                py-2
+                text-base
+                font-medium
+                text-white
+                shadow-sm
+                hover:bg-[#f97316]
+              "
+              >Sign up</router-link
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -791,11 +833,14 @@
 <script>
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import ClickOutside from "vue-click-outside";
+import { useStore } from "vuex";
 export default {
   directives: { ClickOutside },
   setup() {
+    const store = useStore();
+
     const solutions = [
       {
         name: "Analytics",
@@ -964,6 +1009,11 @@ export default {
       showMenu.value = false;
     };
 
+    const user = computed(() => store.getters.user);
+    const logout = () => {
+      store.dispatch("logout");
+    };
+
     return {
       toggleDropdown,
       toggleDropdownTwo,
@@ -972,6 +1022,7 @@ export default {
       hideDropdownTwo,
       closeMenu,
       hideMenu,
+      logout,
       showMenu,
       showDropdown,
       showDropdownTwo,
@@ -980,6 +1031,7 @@ export default {
       resources,
       recentPosts,
       destinations,
+      user,
     };
   },
 };

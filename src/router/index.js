@@ -9,11 +9,13 @@ import DetailTour from '../views/Tours/DetailTour.vue'
 import HotelsHomePage from '../views/Hotels/HotelsHomePage.vue'
 import Tours from '../views/Tours/Tours.vue'
 import AllTours from '../views/Tours/AllTours.vue'
+import UserProfile from '../views/User/UserProfile.vue'
 
 import UserLayout from '../layouts/UserLayout.vue'
 
 
 import store from '../store/store'
+import { auth } from '../firebase'
 
 
 const router = createRouter({
@@ -61,22 +63,22 @@ const router = createRouter({
       component: ContactView,
       meta: { auth: false, layout: UserLayout }
     },
-    {
-      path: '/admin/dashboard',
-      name: 'dashboard',
-      component: Dashboard,
-      meta: {
-        auth: true,
-        layout: UserLayout
-      },
-      beforeEnter: (async (to, from, next) => {
-        const token = await store.getters['token']
-        if (!token && to.meta.auth === true) {
-          next({ name: 'login' });
-        }
-        next();
-      })
-    },
+    // {
+    //   path: '/admin/dashboard',
+    //   name: 'dashboard',
+    //   component: Dashboard,
+    //   meta: {
+    //     auth: true,
+    //     layout: UserLayout
+    //   },
+    //   beforeEnter: (async (to, from, next) => {
+    //     const token = await store.getters['token']
+    //     if (!token && to.meta.auth === true) {
+    //       next({ name: 'login' });
+    //     }
+    //     next();
+    //   })
+    // },
     {
       path: '/login',
       name: 'login',
@@ -100,12 +102,32 @@ const router = createRouter({
       // })
     },
     {
+      path: '/profile',
+      name: 'UserProfile',
+      component: UserProfile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'page-not-found',
       component: PageNotFound,
     }
 
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login' && auth.currentUser) {
+    next('/')
+    return
+  }
+  if (to.matched.some(record => record.meta.requiresAuth) && !auth.currentUser) {
+    next('/login')
+    return;
+  }
+  next()
 })
 
 // router.beforeEach(async (to, from, next) => {
