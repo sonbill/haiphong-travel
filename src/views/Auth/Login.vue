@@ -200,12 +200,12 @@ export default {
 
     const login = () => {
       store.dispatch("login", loginForm).then(() => {
-        router.push({
-          name: "home",
-          query: {
-            ...route.query,
-          },
-        });
+        // router.push({
+        //   name: "home",
+        //   query: {
+        //     ...route.query,
+        //   },
+        // });
       });
     };
     return {

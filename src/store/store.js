@@ -1,11 +1,11 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-import { collection, getDocs, query, where, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
 import { auth } from '../firebase/index'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, } from 'firebase/auth';
 
 
 
@@ -102,18 +102,25 @@ const store = createStore({
           default:
             alert(error.message);
         }
-        return
+        return router.replace('/login')
       }
 
       vuexContext.commit('SET_USER', auth.currentUser)
 
-      router.push('/')
     },
     async register(vuexContext, credentials) {
-      const { email, password } = credentials;
+      const { email, password, displayName } = credentials;
 
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, email, password)
+          .then(async (user) => {
+
+            await setDoc(doc(db, "profiles", user.user.uid), {
+              email: email,
+              password: password,
+              displayName: displayName
+            });
+          })
       } catch (error) {
         switch (error.code) {
           case 'auth/email-already-in-use':
@@ -133,10 +140,9 @@ const store = createStore({
         }
         return
       }
-
       vuexContext.commit('SET_USER', auth.currentUser)
 
-      router.push('/')
+      router.push('/login')
     },
     async logout(vuexContext) {
       await signOut(auth)
@@ -150,7 +156,6 @@ const store = createStore({
         if (user === null) {
           vuexContext.commit('CLEAR_USER')
         } else {
-
           vuexContext.commit('SET_USER', user)
 
           if (router.isReady() && router.currentRoute.value.path === '/login') {

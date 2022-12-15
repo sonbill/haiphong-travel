@@ -37,10 +37,10 @@
           <input type="hidden" name="remember" value="true" />
           <div class="-space-y-px rounded-md shadow-sm">
             <!-- NAME -->
-            <!-- <div>
+            <div>
               <label for="name" class="sr-only">Name</label>
               <input
-                v-model="registerForm.name"
+                v-model="registerForm.displayName"
                 id="name"
                 name="name"
                 type="text"
@@ -64,7 +64,7 @@
                 "
                 placeholder="Name"
               />
-            </div> -->
+            </div>
             <!-- EMAIL -->
             <div>
               <label for="email-address" class="sr-only">Email address</label>
@@ -80,7 +80,7 @@
                   block
                   w-full
                   appearance-none
-                  rounded-t-md
+                  rounded-none
                   border border-gray-300
                   px-3
                   py-2
@@ -227,6 +227,7 @@ export default {
 
   setup() {
     const registerForm = reactive({
+      displayName: "",
       email: "",
       password: "",
     });
@@ -234,8 +235,8 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const register = async () => {
-      await store.dispatch("register", registerForm).then(() => {
+    const register = () => {
+      store.dispatch("register", registerForm).then(() => {
         router.push({
           name: "login",
           query: {

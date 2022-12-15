@@ -106,6 +106,7 @@ const router = createRouter({
       name: 'UserProfile',
       component: UserProfile,
       meta: {
+        layout: UserLayout,
         requiresAuth: true
       }
     },
