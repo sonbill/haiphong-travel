@@ -5,7 +5,7 @@ import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
 import { auth } from '../firebase/index'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword, updateProfile } from 'firebase/auth';
 
 
 
@@ -163,6 +163,25 @@ const store = createStore({
           }
         }
       })
+    },
+    async changePassword(vuexContext, newPassword) {
+      const user = auth.currentUser;
+      updatePassword(user, newPassword).then((pass) => {
+        vuexContext.commit('SET_USER', pass)
+        alert("Change Password Successful");
+      }).catch((error) => {
+        alert(error.message);
+      });
+    },
+    async changeUserProfile(vuexContext, newProfile) {
+      const user = auth.currentUser;
+      updateProfile(user, newProfile).then((profile) => {
+        vuexContext.commit('SET_USER', profile)
+        console.log("profile click")
+        alert("Change Password Successful");
+      }).catch((error) => {
+        alert(error.message);
+      });
     },
 
     // async getUser(vuexContext) {

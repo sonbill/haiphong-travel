@@ -44,7 +44,8 @@
               {{ user.displayName || name }}
             </h3>
             <div class="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
-              <form>
+              <form @submit.prevent="updateProfile()">
+                <!-- EMAIL -->
                 <input
                   type="email"
                   placeholder="Email"
@@ -68,10 +69,12 @@
                     sm:text-sm
                   "
                 />
+                <!-- NAME -->
                 <input
                   type="text"
                   placeholder="name"
-                  :value="user.displayName || 'Username'"
+                  v-model="userProfile.displayName"
+                  required
                   class="
                     relative
                     block
@@ -90,9 +93,12 @@
                     sm:text-sm
                   "
                 />
+                <!-- PHONE -->
                 <input
                   type="number"
                   placeholder="Phone"
+                  v-model="userProfile.phone"
+                  required
                   class="
                     relative
                     block
@@ -137,10 +143,10 @@
               <div class="w-full px-4">
                 <TabsWrapper>
                   <Tab title="Change Password">
-                    <form action="">
+                    <form @submit.prevent="updatePassword()">
                       <input
                         type="password"
-                        placeholder="New password"
+                        placeholder="Old password"
                         class="
                           relative
                           block
@@ -160,8 +166,9 @@
                         "
                       />
                       <input
+                        v-model="newPassword"
                         type="password"
-                        placeholder="Old password"
+                        placeholder="New password"
                         class="
                           relative
                           block
@@ -181,6 +188,7 @@
                         "
                       />
                       <button
+                        @click="updatePassword()"
                         type="submit"
                         class="
                           block
@@ -499,7 +507,7 @@
 </template>
 
 <script>
-import { computed, ref, onBeforeMount } from "vue";
+import { computed, ref, onBeforeMount, reactive } from "vue";
 import TabsWrapper from "../../components/Tours/DetailTour/TabsWrapper.vue";
 import Tab from "../../components/Tours/DetailTour/Tab.vue";
 import { useStore } from "vuex";
@@ -509,9 +517,14 @@ export default {
   name: "Profile",
   components: { Tab, TabsWrapper },
   setup() {
+    const newPassword = ref();
     const store = useStore();
     const name = ref("");
     const user = computed(() => store.getters.user);
+    const userProfile = reactive({
+      displayName: "",
+      phone: "",
+    });
 
     onBeforeMount(() => {
       const detailUser = auth.currentUser;
@@ -519,8 +532,14 @@ export default {
         name.value = detailUser.email.split("@")[0];
       }
     });
+    const updateProfile = () => {
+      store.dispatch("changeUserProfile", userProfile);
+    };
+    const updatePassword = () => {
+      store.dispatch("changePassword", newPassword.value);
+    };
 
-    return { user, name };
+    return { user, name, updatePassword, updateProfile, userProfile };
   },
 };
 </script>
