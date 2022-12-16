@@ -1,198 +1,478 @@
 <template>
   <div class="max-w-7xl mx-auto" v-if="tour">
-    <!-- HEADER -->
-    <div class="my-10">
-      <!-- TOUR PLACE -->
-      <h5 class="text-zinc-500 mb-5">{{ tour.tourPlace }}</h5>
-      <!-- TOUR NAME -->
-      <h1 class="text-3xl">{{ tour.tourName }}</h1>
-      <!-- TOUR DETAIL -->
-      <div
-        class="
-          grid grid-cols-1
-          md:grid-cols-2
-          divide-x-2 divide-y-2
-          md:divide-y-0
-        "
-      >
-        <!-- TOUR DETAIL ROWS - 1 -->
-        <div class="grid grid-cols-2 col-span-1 divide-x-2">
-          <!-- TOUR DETAIL ITEM -->
-          <!-- PRICE -->
-          <div class="col-span-1">
-            <div class="flex flex-col py-2">
-              <span class="text-zinc-500">From</span>
-              <span class="font-bold">{{ tour.price }}</span>
-            </div>
-          </div>
-          <!-- TOUR DETAIL ITEM -->
-          <!-- TIME -->
-          <div class="col-span-1">
-            <div class="flex flex-col px-5 py-2">
-              <span class="text-zinc-500">From</span>
-              <span class="font-bold"> {{ tour.time }} days </span>
-            </div>
-          </div>
-        </div>
-        <!-- TOUR DETAIL ROWS - 2 -->
-        <div class="grid grid-cols-2 col-span-1 divide-x-2">
-          <!-- TOUR DETAIL ITEM -->
-          <!-- TOUR TYPE -->
-          <div class="col-span-1">
-            <div class="flex flex-col px-0 md:px-5 py-2">
-              <span class="text-zinc-500">Tour Type</span>
-              <div class="flex space-x-2">
-                <p
-                  v-for="(type, index) in tour.tourType"
-                  :key="index"
-                  class="font-bold"
-                >
-                  {{ type }}
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- TOUR DETAIL ITEM -->
-          <!-- RATING -->
-          <div class="col-span-1">
-            <div class="px-5 py-2">
-              <span class="text-zinc-500">Reviews</span>
-              <div class="flex items-center">
-                <svg
-                  class="w-5 h-5 text-yellow-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                <svg
-                  class="w-5 h-5 text-yellow-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                <svg
-                  class="w-5 h-5 text-yellow-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                <svg
-                  class="w-5 h-5 text-yellow-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                <svg
-                  class="w-5 h-5 text-yellow-300"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                  ></path>
-                </svg>
-                <span
-                  class="
-                    bg-blue-100
-                    text-blue-800 text-xs
-                    font-semibold
-                    mr-2
-                    px-2.5
-                    py-0.5
-                    rounded
-                    dark:bg-blue-200 dark:text-blue-800
-                    ml-3
-                  "
-                  >5.0</span
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- IMAGE -->
-    <div>
-      <!-- CURRENT SLIDE IMAGE -->
-      <div class="w-full my-10">
-        <img
-          :src="currentImg || tour.image"
-          alt=""
-          class="w-[837px] h-[540px] object-cover mx-auto rounded-sm"
-        />
-      </div>
-      <!-- SLIDE LOOP IMAGES -->
-      <div class="h-[150px]">
-        <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
-          <slide
-            v-for="(img, index) in tour.image"
-            :key="index"
-            class="mx-3 md:mx-0"
+    <div class="flex flex-col md:flex-row">
+      <!-- ITEM - 1 -->
+      <div>
+        <!-- HEADER -->
+        <div class="my-10">
+          <!-- TOUR PLACE -->
+          <h5 class="text-zinc-500 mb-5">{{ tour.tourPlace }}</h5>
+          <!-- TOUR NAME -->
+          <h1 class="text-3xl">{{ tour.tourName }}</h1>
+          <!-- TOUR DETAIL -->
+          <div
+            class="
+              grid grid-cols-1
+              md:grid-cols-2
+              divide-x-2 divide-y-2
+              md:divide-y-0
+            "
           >
+            <!-- TOUR DETAIL ROWS - 1 -->
+            <div class="grid grid-cols-2 col-span-1 divide-x-2">
+              <!-- TOUR DETAIL ITEM -->
+              <!-- PRICE -->
+              <div class="col-span-1">
+                <div class="flex flex-col py-2">
+                  <span class="text-zinc-500">From</span>
+                  <span class="font-bold">{{ tour.price }}</span>
+                </div>
+              </div>
+              <!-- TOUR DETAIL ITEM -->
+              <!-- TIME -->
+              <div class="col-span-1">
+                <div class="flex flex-col px-5 py-2">
+                  <span class="text-zinc-500">From</span>
+                  <span class="font-bold"> {{ tour.time }} days </span>
+                </div>
+              </div>
+            </div>
+            <!-- TOUR DETAIL ROWS - 2 -->
+            <div class="grid grid-cols-2 col-span-1 divide-x-2">
+              <!-- TOUR DETAIL ITEM -->
+              <!-- TOUR TYPE -->
+              <div class="col-span-1">
+                <div class="flex flex-col px-0 md:px-5 py-2">
+                  <span class="text-zinc-500">Tour Type</span>
+                  <div class="flex space-x-2">
+                    <p
+                      v-for="(type, index) in tour.tourType"
+                      :key="index"
+                      class="font-bold"
+                    >
+                      {{ type }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- TOUR DETAIL ITEM -->
+              <!-- RATING -->
+              <div class="col-span-1">
+                <div class="px-5 py-2">
+                  <span class="text-zinc-500">Reviews</span>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-5 h-5 text-yellow-300"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      class="w-5 h-5 text-yellow-300"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      class="w-5 h-5 text-yellow-300"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      class="w-5 h-5 text-yellow-300"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      class="w-5 h-5 text-yellow-300"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <span
+                      class="
+                        bg-blue-100
+                        text-blue-800 text-xs
+                        font-semibold
+                        mr-2
+                        px-2.5
+                        py-0.5
+                        rounded
+                        dark:bg-blue-200 dark:text-blue-800
+                        ml-3
+                      "
+                      >5.0</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- IMAGE -->
+        <div>
+          <!-- CURRENT SLIDE IMAGE -->
+          <div class="w-full my-10">
             <img
-              :src="img"
-              @mouseover="changeActivePicture(img, index)"
+              :src="currentImg || tour.image"
               alt=""
-              class="
-                w-[158px]
-                h-[112px]
-                object-cover
-                rounded-sm
-                transition-all
-                hover:scale-125 hover:w-[w-200px] hover:h-[130px]
-              "
+              class="w-[837px] h-[540px] object-cover mx-auto rounded-sm"
             />
-          </slide>
-        </carousel>
-      </div>
-    </div>
-    <!-- DETAIL TOUR INFORMATION -->
-    <div class="mt-10">
-      <!-- DETAIL TOUR INFORMATION TABS WRAPPER -->
-      <div class="flex space-x-5">
-        <TabsWrapper>
-          <Tab title="Overview">
-            <span class="block text-xl mb-3">DESCRIPTION</span>
-            <p class="text-gray-500 text-md">{{ tour.description }}</p>
-          </Tab>
-          <Tab title="Tour Plan">
-            <p class="text-xl mb-3">TOUR PLAN</p>
-            <ul
-              v-for="plan in tour.tourPlan"
-              :key="plan.id"
-              class="list-inside"
-            >
-              <li class="font-bold text-lg list-disc mb-3">{{ plan }}</li>
-            </ul>
-          </Tab>
-          <Tab title="Reviews">5 sao</Tab>
-        </TabsWrapper>
-      </div>
+          </div>
+          <!-- SLIDE LOOP IMAGES -->
+          <div class="h-[150px]">
+            <carousel :items-to-show="3" class="max-w-2xl mx-auto py-5">
+              <slide
+                v-for="(img, index) in tour.image"
+                :key="index"
+                class="mx-3 md:mx-0"
+              >
+                <img
+                  :src="img"
+                  @mouseover="changeActivePicture(img, index)"
+                  alt=""
+                  class="
+                    w-[158px]
+                    h-[112px]
+                    object-cover
+                    rounded-sm
+                    transition-all
+                    hover:scale-125 hover:w-[w-200px] hover:h-[130px]
+                  "
+                />
+              </slide>
+            </carousel>
+          </div>
+        </div>
+        <!-- DETAIL TOUR INFORMATION -->
+        <div class="mt-10">
+          <!-- DETAIL TOUR INFORMATION TABS WRAPPER -->
+          <div class="flex space-x-5">
+            <TabsWrapper>
+              <Tab title="Overview">
+                <span class="block text-xl mb-3">DESCRIPTION</span>
+                <p class="text-gray-500 text-md">{{ tour.description }}</p>
+              </Tab>
+              <Tab title="Tour Plan">
+                <p class="text-xl mb-3">TOUR PLAN</p>
+                <ul
+                  v-for="plan in tour.tourPlan"
+                  :key="plan.id"
+                  class="list-inside"
+                >
+                  <li class="font-bold text-lg list-disc mb-3">{{ plan }}</li>
+                </ul>
+              </Tab>
+              <Tab title="Reviews">5 sao</Tab>
+            </TabsWrapper>
+          </div>
 
-      <!-- <div>
-        <iframe
-          v-show="isShowing"
-          src="http://www.weather.gov/"
-          frameborder="0"
-        ></iframe>
-      </div> -->
+          <!-- <div>
+            <iframe
+              v-show="isShowing"
+              src="http://www.weather.gov/"
+              frameborder="0"
+            ></iframe>
+          </div> -->
+        </div>
+      </div>
+      <!-- ITEM - 2 -->
+      <!-- BOOKING -->
+      <div class="px-3 mt-10 md:mt-0 py-10 border bg-[#f8fafc]">
+        <h1 class="text-xl font-bold mb-10">Booking Tour</h1>
+        <form class="space-y-6" @submit.prevent="bookTour">
+          <!-- SELECT DATE -->
+          <div>
+            <h3 class="mb-2">Choose Date</h3>
+            <div class="border">
+              <Datepicker v-model="dateBooking" range :partial-range="false" />
+            </div>
+          </div>
+          <!-- PICK TIMES -->
+          <div>
+            <h3 class="mb-2">Time</h3>
+            <div class="flex">
+              <!-- 7:00 AM -->
+              <div class="flex items-center mr-4">
+                <input
+                  id="inline-radio"
+                  type="radio"
+                  v-model="dataBooked.time"
+                  value="7:00"
+                  name="inline-radio-group"
+                  class="
+                    w-4
+                    h-4
+                    text-blue-600
+                    bg-gray-100
+                    border-gray-300
+                    focus:ring-blue-500
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                    focus:ring-2
+                    dark:bg-gray-700 dark:border-gray-600
+                  "
+                />
+                <label
+                  for="inline-radio"
+                  class="
+                    ml-2
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  >7:00 AM</label
+                >
+              </div>
+              <!-- 15:00 PM -->
+              <div class="flex items-center mr-4">
+                <input
+                  v-model="dataBooked.time"
+                  id="inline-checked-radio"
+                  type="radio"
+                  value="15:00"
+                  name="inline-radio-group"
+                  class="
+                    w-4
+                    h-4
+                    text-blue-600
+                    bg-gray-100
+                    border-gray-300
+                    focus:ring-blue-500
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                    focus:ring-2
+                    dark:bg-gray-700 dark:border-gray-600
+                  "
+                />
+                <label
+                  for="inline-checked-radio"
+                  class="
+                    ml-2
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  >15:00 PM</label
+                >
+              </div>
+            </div>
+          </div>
+          <!-- GUESTS -->
+          <div>
+            <div
+              class="relative w-full h-16 md:h-full"
+              v-click-outside-element="hideDropdown"
+            >
+              <button
+                type="button"
+                class="flex grow-1 w-full h-16 md:h-full"
+                @click="toggleShowGuests"
+              >
+                <!-- DROPDOWN TITLE -->
+                <div class="px-5 h-full w-full">
+                  <div
+                    class="
+                      flex
+                      items-center
+                      justify-around
+                      h-full
+                      border
+                      p-3
+                      rounded-md
+                      bg-white
+                    "
+                  >
+                    <div class="text-md font-bold text-gray-500">Guests</div>
+                    <span class="font-bold text-lg">
+                      {{ totalGuestCount }}
+                    </span>
+                  </div>
+                </div>
+              </button>
+              <!-- SHOW DROPDOWN -->
+              <div
+                v-show="showGuests"
+                class="
+                  absolute
+                  bg-[#fff]
+                  left-0
+                  top-[100%]
+                  w-full
+                  z-40
+                  md:w-full
+                  border
+                  shadow-md
+                  p-5
+                  space-y-5
+                "
+              >
+                <!-- ADULT -->
+                <div class="flex justify-between items-center">
+                  <span class="select-guests-value">{{ adultNumber }}</span>
+                  <span class="select-guests-title">Adult</span>
+                  <!-- BUTTONS -->
+                  <div class="flex border rounded-lg">
+                    <!-- BUTTON PLUS + -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tl-lg rounded-bl-lg
+                      "
+                      :disabled="adultNumber >= 25"
+                      @click="adultNumber += 1"
+                    >
+                      add
+                    </button>
+                    <!-- BUTTON MINUS - -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tr-lg rounded-br-lg
+                      "
+                      :disabled="adultNumber <= 0"
+                      @click="adultNumber -= 1"
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
+                <!-- YOUTH -->
+                <div class="flex justify-between items-center">
+                  <span class="select-guests-value">{{ youthNumber }}</span>
+                  <span class="select-guests-title">Youth</span>
+                  <!-- BUTTONS -->
+                  <div class="flex border rounded-lg">
+                    <!-- BUTTON PLUS + -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tl-lg rounded-bl-lg
+                      "
+                      :disabled="youthNumber >= 25"
+                      @click="youthNumber += 1"
+                    >
+                      add
+                    </button>
+                    <!-- BUTTON MINUS - -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tr-lg rounded-br-lg
+                      "
+                      :disabled="youthNumber <= 0"
+                      @click="youthNumber -= 1"
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
+                <!-- CHILDREN -->
+                <div class="flex justify-between items-center">
+                  <span class="select-guests-value">{{ childrenNumber }}</span>
+                  <span class="select-guests-title">Children</span>
+                  <!-- BUTTONS -->
+                  <div class="flex border rounded-lg">
+                    <!-- BUTTON PLUS + -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tl-lg rounded-bl-lg
+                      "
+                      :disabled="childrenNumber >= 25"
+                      @click="childrenNumber += 1"
+                    >
+                      add
+                    </button>
+                    <!-- BUTTON MINUS - -->
+                    <button
+                      type="button"
+                      class="
+                        material-icons
+                        text-[#71717a]
+                        hover:text-[#fff]
+                        bg-[#fff]
+                        hover:bg-[#fb923c]
+                        rounded-tr-lg rounded-br-lg
+                      "
+                      :disabled="childrenNumber <= 0"
+                      @click="childrenNumber -= 1"
+                    >
+                      remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- BUTTON -->
+          <button
+            type="submit"
+            class="
+              block
+              uppercase
+              mx-auto
+              shadow
+              bg-indigo-800
+              hover:bg-indigo-700
+              focus:shadow-outline focus:outline-none
+              text-white text-xs
+              py-3
+              px-10
+              rounded
+            "
+          >
+            BOOK
+          </button>
+        </form>
+      </div>
     </div>
     <!-- HIGHLIGHTS -->
     <div
@@ -342,7 +622,12 @@
               <div class="absolute inset-x-0 bottom-5">
                 <!-- BUTTON -->
                 <a
-                  :href="$router.resolve({ name: 'DetailTour', params: { tourID: tour.id } }).href"
+                  :href="
+                    $router.resolve({
+                      name: 'DetailTour',
+                      params: { tourID: tour.id },
+                    }).href
+                  "
                   class="
                     text-white
                     hover:text-white
@@ -377,11 +662,15 @@ import TabsWrapper from "../../components/Tours/DetailTour/TabsWrapper.vue";
 import Tab from "../../components/Tours/DetailTour/Tab.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import axios from "axios";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, reactive } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
+import "@vuepic/vue-datepicker/dist/main.css";
+import ClickOutside from "vue-click-outside";
+
 export default {
   name: "DetailTour",
+  directives: { ClickOutside },
   components: {
     Carousel,
     Slide,
@@ -398,6 +687,60 @@ export default {
     const tourID = computed(() => route.params.tourID);
     const indexOfActive = ref(0);
     const tourCountry = computed(() => store.getters.tour.country);
+    // GUESTS
+    const adultNumber = ref(0);
+    const youthNumber = ref(0);
+    const childrenNumber = ref(0);
+    // const totalGuests = reactive({
+    //   adultNumber: 0,
+    //   youthNumber: 0,
+    //   childrenNumber: 0,
+    // });
+    const totalGuest = [adultNumber, youthNumber, childrenNumber];
+    const showGuests = ref(false);
+    const dateBooking = ref("");
+    const bookedID = ref(null);
+
+    // DATA BOOK
+    const dataBooked = reactive({
+      bookedID: Math.random().toString(36).substring(2, 7),
+      tourID: tourID,
+      date: dateBooking,
+      time: "",
+      guests: totalGuest,
+    });
+
+    // const generateRandomStrings = (length) => {
+    //   let result = " ";
+    //   const charactersLength = characters.length;
+    //   for (let i = 0; i < length; i++) {
+    //     result += characters.charAt(
+    //       Math.floor(Math.random() * charactersLength)
+    //     );
+    //   }
+    //   const id = computed(() => (result = bookedID));
+    //   console.log(id);
+    // };
+
+    const bookTour = () => {
+      console.log(dataBooked);
+      alert(dataBooked.bookedID);
+    };
+
+    // CALCULATE TOTAL GUEST BOOKING
+    const totalGuestCount = computed(() => {
+      return totalGuest
+        .map((item) => item.value)
+        .reduce((total, guest) => total + guest);
+    });
+    // TOGGLE SHOW DROPDOWN
+    const toggleShowGuests = () => {
+      showGuests.value = !showGuests.value;
+    };
+    // HIDE DROPDOWN WHEN CLICK OUTSIDE
+    const hideDropdown = () => {
+      showGuests.value = false;
+    };
 
     onMounted(async () => {
       await store.dispatch("getTour", tourID.value);
@@ -431,12 +774,23 @@ export default {
     };
 
     return {
+      dateBooking,
+      childrenNumber,
+      youthNumber,
+      adultNumber,
+      totalGuestCount,
+      toggleShowGuests,
+      hideDropdown,
+      showGuests,
       tour,
       currentImg,
       changeActivePicture,
       indexOfActive,
       recommendedTours,
       breakpoints,
+      dataBooked,
+      bookTour,
+      // totalGuests,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
