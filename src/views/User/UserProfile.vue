@@ -72,9 +72,8 @@
                 <!-- NAME -->
                 <input
                   type="text"
-                  placeholder="name"
+                  :placeholder="user.displayName || 'Name'"
                   v-model="userProfile.displayName"
-                  required
                   class="
                     relative
                     block
@@ -96,9 +95,8 @@
                 <!-- PHONE -->
                 <input
                   type="number"
-                  placeholder="Phone"
-                  v-model="userProfile.phone"
-                  required
+                  :placeholder="user.phoneNumber || 'Phone number'"
+                  v-model="userProfile.phoneNumber"
                   class="
                     relative
                     block
@@ -117,25 +115,25 @@
                     sm:text-sm
                   "
                 />
+                <button
+                  type="submit"
+                  class="
+                    block
+                    font-bold
+                    mt-5
+                    mx-auto
+                    bg-blue-500
+                    hover:bg-blue-600
+                    focus:shadow-outline focus:outline-none
+                    text-white text-xs
+                    py-3
+                    px-10
+                    rounded
+                  "
+                >
+                  Save Changed
+                </button>
               </form>
-              <button
-                type="submit"
-                class="
-                  block
-                  font-bold
-                  mt-5
-                  mx-auto
-                  bg-blue-500
-                  hover:bg-blue-600
-                  focus:shadow-outline focus:outline-none
-                  text-white text-xs
-                  py-3
-                  px-10
-                  rounded
-                "
-              >
-                Save Changed
-              </button>
             </div>
           </div>
           <div class="mt-6 py-6 border-t border-slate-200 text-center">
@@ -523,7 +521,7 @@ export default {
     const user = computed(() => store.getters.user);
     const userProfile = reactive({
       displayName: "",
-      phone: "",
+      phoneNumber: "",
     });
 
     onBeforeMount(() => {

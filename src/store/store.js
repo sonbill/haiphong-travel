@@ -5,7 +5,7 @@ import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
 import { auth } from '../firebase/index'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword, updateProfile, getAuth } from 'firebase/auth';
 
 
 
@@ -91,6 +91,7 @@ const store = createStore({
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
+        router.push('/')
       } catch (error) {
         switch (error.code) {
           case 'auth/user-not-found':
@@ -165,20 +166,20 @@ const store = createStore({
       })
     },
     async changePassword(vuexContext, newPassword) {
-      const user = auth.currentUser;
-      updatePassword(user, newPassword).then((pass) => {
-        vuexContext.commit('SET_USER', pass)
+      const auth = getAuth();
+
+      updatePassword(auth.currentUser, newPassword).then(() => {
+        // vuexContext.commit('SET_USER', pass)
         alert("Change Password Successful");
       }).catch((error) => {
         alert(error.message);
       });
     },
     async changeUserProfile(vuexContext, newProfile) {
-      const user = auth.currentUser;
-      updateProfile(user, newProfile).then((profile) => {
-        vuexContext.commit('SET_USER', profile)
-        console.log("profile click")
-        alert("Change Password Successful");
+      const auth = getAuth();
+      updateProfile(auth.currentUser, { displayName: newProfile.displayName, phoneNumber: newProfile.phoneNumber }).then(() => {
+        vuexContext.commit("SET_USER", auth.currentUser)
+        alert("Update Profile Successful");
       }).catch((error) => {
         alert(error.message);
       });
