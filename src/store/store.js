@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
-import { collection, getDocs, query, where, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, doc, getDoc, setDoc, addDoc, Timestamp } from "firebase/firestore";
 import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
@@ -348,6 +348,21 @@ const store = createStore({
         fbTours.push(recommendedTour);
       });
       vuexContext.commit('SET_RECOMMENDED', fbTours);
+    },
+    async bookTour(vuexContext, tourInfor) {
+      try {
+        const bookingRef = collection(db, "booking");
+        await addDoc(bookingRef, {
+          bookedID: tourInfor.value.bookedID,
+          tourID: tourInfor.value.tourID,
+          date: tourInfor.value.date.value,
+          guests: tourInfor.value.guests,
+          time: tourInfor.value.time,
+        });
+        alert("Successfully Booked")
+      } catch (error) {
+        console.log("Error adding document: ", error.message);
+      }
     },
 
   }

@@ -696,43 +696,37 @@ export default {
     //   youthNumber: 0,
     //   childrenNumber: 0,
     // });
-    const totalGuest = [adultNumber, youthNumber, childrenNumber];
+    const totalGuest = computed(() => [
+      adultNumber.value,
+      youthNumber.value,
+      childrenNumber.value,
+    ]);
     const showGuests = ref(false);
     const dateBooking = ref("");
-    const bookedID = ref(null);
 
     // DATA BOOK
-    const dataBooked = reactive({
+    const dataBooked = computed(() => ({
       bookedID: Math.random().toString(36).substring(2, 7),
-      tourID: tourID,
+      tourID: tourID.value,
       date: dateBooking,
       time: "",
-      guests: totalGuest,
-    });
-
-    // const generateRandomStrings = (length) => {
-    //   let result = " ";
-    //   const charactersLength = characters.length;
-    //   for (let i = 0; i < length; i++) {
-    //     result += characters.charAt(
-    //       Math.floor(Math.random() * charactersLength)
-    //     );
-    //   }
-    //   const id = computed(() => (result = bookedID));
-    //   console.log(id);
-    // };
+      guests: totalGuest.value,
+    }));
 
     const bookTour = () => {
-      console.log(dataBooked);
-      alert(dataBooked.bookedID);
+      store.dispatch("bookTour", dataBooked);
     };
 
+    // const formatTotalGuest = computed(() => {
+    //   return totalGuest.map((item) => item.value);
+    // });
     // CALCULATE TOTAL GUEST BOOKING
     const totalGuestCount = computed(() => {
-      return totalGuest
-        .map((item) => item.value)
+      return totalGuest.value
+        .map((item) => item)
         .reduce((total, guest) => total + guest);
     });
+
     // TOGGLE SHOW DROPDOWN
     const toggleShowGuests = () => {
       showGuests.value = !showGuests.value;
@@ -790,7 +784,7 @@ export default {
       breakpoints,
       dataBooked,
       bookTour,
-      // totalGuests,
+      totalGuest,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
