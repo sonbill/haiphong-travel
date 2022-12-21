@@ -221,7 +221,7 @@
                               text-left
                             "
                           >
-                            #
+                            ID
                           </th>
                           <th
                             scope="col"
@@ -234,7 +234,7 @@
                               text-left
                             "
                           >
-                            First
+                            BOOKING ID
                           </th>
                           <th
                             scope="col"
@@ -247,7 +247,7 @@
                               text-left
                             "
                           >
-                            Last
+                            DATE
                           </th>
                           <th
                             scope="col"
@@ -260,12 +260,39 @@
                               text-left
                             "
                           >
-                            Handle
+                            GUEST
+                          </th>
+                          <th
+                            scope="col"
+                            class="
+                              text-sm
+                              font-medium
+                              text-gray-900
+                              px-6
+                              py-4
+                              text-left
+                            "
+                          >
+                            TIME
+                          </th>
+                          <th
+                            scope="col"
+                            class="
+                              text-sm
+                              font-medium
+                              text-gray-900
+                              px-6
+                              py-4
+                              text-left
+                            "
+                          >
+                            TOUR NAME
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr class="bg-gray-100 border-b">
+                          <!-- ID -->
                           <td
                             class="
                               px-6
@@ -278,6 +305,7 @@
                           >
                             1
                           </td>
+                          <!-- BOOKING ID -->
                           <td
                             class="
                               text-sm text-gray-900
@@ -289,6 +317,7 @@
                           >
                             Mark
                           </td>
+                          <!-- DATE -->
                           <td
                             class="
                               text-sm text-gray-900
@@ -300,6 +329,7 @@
                           >
                             Otto
                           </td>
+                          <!-- GUESTS -->
                           <td
                             class="
                               text-sm text-gray-900
@@ -307,71 +337,11 @@
                               px-6
                               py-4
                               whitespace-nowrap
-                            "
-                          >
-                            @mdo
-                          </td>
-                        </tr>
-                        <tr class="bg-white border-b">
-                          <td
-                            class="
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                              text-sm
-                              font-medium
-                              text-gray-900
-                            "
-                          >
-                            2
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            Jacob
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            Dillan
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            @fat
-                          </td>
-                        </tr>
-                        <tr class="bg-gray-100 border-b">
-                          <td
-                            class="
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                              text-sm
-                              font-medium
-                              text-gray-900
                             "
                           >
                             3
                           </td>
+                          <!-- TIME -->
                           <td
                             class="
                               text-sm text-gray-900
@@ -381,8 +351,9 @@
                               whitespace-nowrap
                             "
                           >
-                            Mark
+                            7:00
                           </td>
+                          <!-- TOUR NAME -->
                           <td
                             class="
                               text-sm text-gray-900
@@ -392,103 +363,7 @@
                               whitespace-nowrap
                             "
                           >
-                            Twen
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            @twitter
-                          </td>
-                        </tr>
-                        <tr class="bg-white border-b">
-                          <td
-                            class="
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                              text-sm
-                              font-medium
-                              text-gray-900
-                            "
-                          >
-                            4
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            Bob
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            Dillan
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            @fat
-                          </td>
-                        </tr>
-                        <tr class="bg-gray-100 border-b">
-                          <td
-                            class="
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                              text-sm
-                              font-medium
-                              text-gray-900
-                            "
-                          >
-                            5
-                          </td>
-                          <td
-                            colspan="2"
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                              text-center
-                            "
-                          >
-                            Larry the Bird
-                          </td>
-                          <td
-                            class="
-                              text-sm text-gray-900
-                              font-light
-                              px-6
-                              py-4
-                              whitespace-nowrap
-                            "
-                          >
-                            @twitter
+                            SƠN ĐÒNG
                           </td>
                         </tr>
                       </tbody>

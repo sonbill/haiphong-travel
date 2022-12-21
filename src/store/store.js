@@ -5,7 +5,7 @@ import { db } from "@/firebase";
 import { ref } from "vue";
 import router from '../router';
 import { auth } from '../firebase/index'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword, updateProfile, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updatePassword, updateProfile, getAuth, onAuthStateChanged } from 'firebase/auth';
 
 
 
@@ -20,6 +20,7 @@ const store = createStore({
     toursSearched: [],
     tour: null,
     recommended: null,
+    history: null,
   },
   getters: {
     token: state => state.token,
@@ -30,8 +31,7 @@ const store = createStore({
     tour: state => state.tour,
     toursSearched: state => state.toursSearched,
     recommended: state => state.recommended,
-
-
+    history: state => state.history,
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -57,6 +57,9 @@ const store = createStore({
     },
     SET_RECOMMENDED(state, recommended) {
       state.recommended = recommended;
+    },
+    SET_HISTORY(state, history) {
+      state.history = history;
     },
   },
   actions: {
@@ -350,21 +353,43 @@ const store = createStore({
       vuexContext.commit('SET_RECOMMENDED', fbTours);
     },
     async bookTour(vuexContext, tourInfor) {
-      try {
-        const bookingRef = collection(db, "booking");
-        await addDoc(bookingRef, {
-          bookedID: tourInfor.value.bookedID,
-          tourID: tourInfor.value.tourID,
-          date: tourInfor.value.date.value,
-          guests: tourInfor.value.guests,
-          time: tourInfor.value.time,
-        });
-        alert("Successfully Booked")
-      } catch (error) {
-        console.log("Error adding document: ", error.message);
-      }
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const bookingRef = collection(db, "booking");
+          addDoc(bookingRef, {
+            uid: user.uid,
+            bookedID: tourInfor.value.bookedID,
+            tourID: tourInfor.value.tourID,
+            date: tourInfor.value.date.value,
+            guests: tourInfor.value.guests,
+            time: tourInfor.value.time,
+          });
+          alert("Successfully Booked")
+          // ...
+        } else {
+          alert("error")
+        }
+      });
     },
+    async getHistory() {
+      const querySnapshot = await getDocs(collection(db, "booking"));
+      let fbTours = [];
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const tour = {
+          id: doc.id,
+          bookedID: doc.data().city,
+          date: doc.data().date,
+          guests: doc.data().guests,
+          time: doc.data().time,
+          tourID: doc.data().tourID,
+        };
+        fbTours.push(tour);
+      });
+      vuexContext.commit('SET_TOURS', fbTours);
 
+    }
   }
 })
 
