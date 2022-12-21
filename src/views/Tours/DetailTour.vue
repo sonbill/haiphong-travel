@@ -200,7 +200,8 @@
       </div>
       <!-- ITEM - 2 -->
       <!-- BOOKING -->
-      <div class="px-3 mt-10 md:mt-0 py-10 border bg-[#f8fafc]">
+      <!-- AUTH -->
+      <div class="px-3 mt-10 md:mt-0 py-10 border bg-[#f8fafc]" v-if="auth">
         <h1 class="text-xl font-bold mb-10">Booking Tour</h1>
         <form class="space-y-6" @submit.prevent="bookTour">
           <!-- SELECT DATE -->
@@ -472,6 +473,20 @@
             BOOK
           </button>
         </form>
+      </div>
+      <!-- NOT AUTH -->
+      <div class="px-3 mt-10 md:mt-0 py-10 border bg-[#f8fafc]" v-else>
+        <div class="flex flex-col items-center">
+          <p class="text-gray-500 text-sm">
+            Please login your account for booking
+          </p>
+          <router-link
+            :to="{ name: 'login' }"
+            class="font-medium text-orange-600 hover:text-orange-500 underline"
+          >
+            Login here
+          </router-link>
+        </div>
       </div>
     </div>
     <!-- HIGHLIGHTS -->
@@ -745,6 +760,10 @@ export default {
       return store.getters.tour;
     });
 
+    const auth = computed(() => {
+      return store.getters.user;
+    });
+
     const recommendedTours = computed(() => {
       return store.getters.recommended;
     });
@@ -777,6 +796,7 @@ export default {
       hideDropdown,
       showGuests,
       tour,
+      auth,
       currentImg,
       changeActivePicture,
       indexOfActive,
