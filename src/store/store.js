@@ -21,6 +21,7 @@ const store = createStore({
     tour: null,
     recommended: null,
     history: null,
+    destinations: null
   },
   getters: {
     token: state => state.token,
@@ -32,6 +33,7 @@ const store = createStore({
     toursSearched: state => state.toursSearched,
     recommended: state => state.recommended,
     history: state => state.history,
+    destinations: state => state.destinations,
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -60,6 +62,9 @@ const store = createStore({
     },
     SET_HISTORY(state, history) {
       state.history = history;
+    },
+    SET_DESTINATIONS(state, destinations) {
+      state.destinations = destinations;
     },
   },
   actions: {
@@ -118,7 +123,6 @@ const store = createStore({
       try {
         await createUserWithEmailAndPassword(auth, email, password)
           .then(async (user) => {
-
             await setDoc(doc(db, "profiles", user.user.uid), {
               email: email,
               password: password,
@@ -388,6 +392,36 @@ const store = createStore({
         fbTours.push(tour);
       });
       vuexContext.commit('SET_TOURS', fbTours);
+
+    },
+    async getDestination(vuexContext, destination) {
+      let fbTours = [];
+      console.log(destination);
+      const q = query(collection(db, "tours"), where("country", "==", destination));
+
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        const destination = {
+          id: doc.id,
+          city: doc.data().city,
+          continents: doc.data().continents,
+          country: doc.data().country,
+          description: doc.data().description,
+          image: doc.data().image,
+          price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(doc.data().price),
+          saleOff: doc.data().saleOff,
+          time: doc.data().time,
+          tourName: doc.data().tourName,
+          tourPlace: doc.data().tourPlace,
+          tourPlan: doc.data().tourPlan,
+          tourType: doc.data().tourType,
+          discount: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(doc.data().price) - ((parseFloat(doc.data().price) * doc.data().saleOff) / 100))
+        };
+        fbTours.push(destination);
+      });
+      vuexContext.commit('SET_DESTINATIONS', fbTours);
+
 
     }
   }

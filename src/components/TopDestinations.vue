@@ -13,7 +13,12 @@
         <!-- ITEM - 1 -->
         <div class="col-span-1">
           <div>
-            <router-link to="#">
+            <router-link
+              :to="{
+                name: 'AllDestinations',
+                params: { destinationParams: 'USA' },
+              }"
+            >
               <div>
                 <div
                   class="
@@ -66,7 +71,7 @@
                     "
                   >
                     <span class="text-3xl font-bold text-white tracking-wider"
-                      >Americas</span
+                      >USA</span
                     >
                   </div>
                 </div>
@@ -77,7 +82,12 @@
         <!-- ITEM - 2 -->
         <div class="col-span-1">
           <div>
-            <router-link to="#">
+            <router-link
+              :to="{
+                name: 'AllDestinations',
+                params: { destinationParams: 'Việt Nam' },
+              }"
+            >
               <div class="rounded-md">
                 <div
                   class="
@@ -144,7 +154,12 @@
         <!-- ITEM - 1 -->
         <div class="col-span-1">
           <div>
-            <router-link to="#">
+            <router-link
+              :to="{
+                name: 'AllDestinations',
+                params: { destinationParams: 'England' },
+              }"
+            >
               <div class="rounded-md">
                 <div
                   class="
@@ -197,7 +212,7 @@
                     "
                   >
                     <span class="text-3xl font-bold text-white tracking-wider"
-                      >Hong Kong</span
+                      >England</span
                     >
                   </div>
                 </div>
@@ -208,7 +223,12 @@
         <!-- ITEM - 2 -->
         <div class="col-span-1">
           <div>
-            <router-link to="#">
+            <router-link
+              :to="{
+                name: 'AllDestinations',
+                params: { destinationParams: 'New Zealand' },
+              }"
+            >
               <div class="rounded-md">
                 <div
                   class="
@@ -272,7 +292,12 @@
         <!-- ITEM - 3 -->
         <div class="col-span-1">
           <div>
-            <router-link to="#">
+            <router-link
+              :to="{
+                name: 'AllDestinations',
+                params: { destinationParams: 'Italy' },
+              }"
+            >
               <div class="rounded-md">
                 <div
                   class="
