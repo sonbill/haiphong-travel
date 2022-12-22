@@ -423,6 +423,34 @@ const store = createStore({
       vuexContext.commit('SET_DESTINATIONS', fbTours);
 
 
+    },
+    async getLocalDestination(vuexContext, destination) {
+      let fbTours = [];
+      console.log(destination);
+      const q = query(collection(db, "tours"), where("city", "==", destination));
+
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach((doc) => {
+        const destination = {
+          id: doc.id,
+          city: doc.data().city,
+          continents: doc.data().continents,
+          country: doc.data().country,
+          description: doc.data().description,
+          image: doc.data().image,
+          price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(doc.data().price),
+          saleOff: doc.data().saleOff,
+          time: doc.data().time,
+          tourName: doc.data().tourName,
+          tourPlace: doc.data().tourPlace,
+          tourPlan: doc.data().tourPlan,
+          tourType: doc.data().tourType,
+          discount: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(parseFloat(doc.data().price) - ((parseFloat(doc.data().price) * doc.data().saleOff) / 100))
+        };
+        fbTours.push(destination);
+      });
+      vuexContext.commit('SET_DESTINATIONS', fbTours);
     }
   }
 })

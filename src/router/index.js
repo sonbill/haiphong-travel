@@ -9,6 +9,7 @@ import DetailTour from '../views/Tours/DetailTour.vue'
 import HotelsHomePage from '../views/Hotels/HotelsHomePage.vue'
 import Tours from '../views/Tours/Tours.vue'
 import Destinations from '../views/Destinations/AllDestinations.vue'
+import LocalDestinations from '../views/Destinations/AllLocalDestinations.vue'
 import AllTours from '../views/Tours/AllTours.vue'
 import UserProfile from '../views/User/UserProfile.vue'
 
@@ -48,6 +49,13 @@ const router = createRouter({
       path: '/destinations/:destinationParams',
       name: 'AllDestinations',
       component: Destinations,
+      meta: { layout: UserLayout }
+    },
+    // ALL LOCAL DESTINATIONS
+    {
+      path: '/local/:destinationParams',
+      name: 'AllLocalDestinations',
+      component: LocalDestinations,
       meta: { layout: UserLayout }
     },
     // SEARCH TOUR

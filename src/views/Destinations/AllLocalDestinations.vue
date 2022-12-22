@@ -189,19 +189,17 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
-  name: "AllDestinations",
+  name: "AllLocalDestinations",
   setup() {
     const store = useStore();
     const route = useRoute();
     const destinationParams = computed(() => route.params.destinationParams);
     const titleArray = [
-      "USA",
-      "Việt Nam",
-      "New Zealand",
-      "England",
-      "Italy",
-      "Japan",
-      "Korea",
+      "Hà Nội",
+      "Đà Nẵng",
+      "Đà Lạt",
+      "Hồ Chí Minh",
+      "Qui Nhơn",
     ];
     const setTitle = computed(() => {
       const rs = titleArray.find(
@@ -211,7 +209,7 @@ export default {
     });
 
     onMounted(async () => {
-      await store.dispatch("getDestination", destinationParams.value);
+      await store.dispatch("getLocalDestination", destinationParams.value);
     });
     const destinations = computed(() => store.getters.destinations);
 

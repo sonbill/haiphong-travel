@@ -34,7 +34,7 @@
           <h1 class="font-extrabold text-7xl text-white">
             {{ slideItem.content }}
           </h1>
-          <div>
+          <!-- <div>
             <router-link
               :to="{ name: 'register' }"
               class="
@@ -57,7 +57,7 @@
             >
               More information
             </router-link>
-          </div>
+          </div> -->
         </div>
       </div>
     </slide>
@@ -70,6 +70,7 @@
 <script>
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+import { computed } from "vue";
 
 import Search from "./Search.vue";
 
@@ -91,6 +92,9 @@ export default {
         snapAlign: "start",
       },
     };
+
+    const destination = computed(() => store.getters.destinations);
+
     const slides = [
       {
         title: "New York, USA",
