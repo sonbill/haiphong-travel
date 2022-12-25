@@ -542,13 +542,13 @@
           <router-link
             :to="{ name: 'AllTours' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Tours</router-link
+            >Tất cả Tour</router-link
           >
           <!-- NAV ITEM - 4 -->
           <router-link
             :to="{ name: 'ContactView' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900"
-            >Contact</router-link
+            >Liên hệ</router-link
           >
         </nav>
         <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
@@ -565,7 +565,7 @@
                 hover:text-gray-900
               "
             >
-              Profile
+              {{ user.displayName || name }}
             </router-link>
             <!-- LOGOUT -->
             <button
@@ -588,7 +588,7 @@
                 hover:bg-[#f97316]
               "
             >
-              Logout
+              Đăng xuất
             </button>
           </div>
           <!-- AUTH -->
@@ -602,7 +602,7 @@
                 text-gray-500
                 hover:text-gray-900
               "
-              >Sign in</router-link
+              >Đăng nhập</router-link
             >
             <router-link
               :to="{ name: 'register' }"
@@ -623,7 +623,7 @@
                 shadow-sm
                 hover:bg-[#f97316]
               "
-              >Sign up</router-link
+              >Đăng ký</router-link
             >
           </div>
         </div>
@@ -914,9 +914,11 @@
 <script>
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, onBeforeMount } from "vue";
 import ClickOutside from "vue-click-outside";
 import { useStore } from "vuex";
+import { auth } from "../firebase/index";
+
 export default {
   directives: { ClickOutside },
   setup() {
@@ -1091,6 +1093,15 @@ export default {
     };
 
     const user = computed(() => store.getters.user);
+    const name = ref("");
+
+    onBeforeMount(() => {
+      const detailUser = auth.currentUser;
+      if (detailUser) {
+        name.value = detailUser.email.split("@")[0];
+      }
+    });
+
     const logout = () => {
       store.dispatch("logout");
     };
@@ -1113,6 +1124,7 @@ export default {
       recentPosts,
       destinations,
       user,
+      name,
     };
   },
 };

@@ -477,8 +477,8 @@
         <form class="space-y-6" @submit.prevent="bookTour">
           <!-- SELECT DATE -->
           <div>
-            <h3 class="mb-2">Choose Date</h3>
-            <div class="border">
+            <h3 class="mb-2 font-bold">Choose Date</h3>
+            <div class="border rounded-md">
               <Datepicker v-model="dateBooking" range :partial-range="false" />
             </div>
           </div>
@@ -657,7 +657,7 @@
           </div>
           <!-- PICK TIMES -->
           <div>
-            <h3 class="mb-2">Time</h3>
+            <h3 class="mb-2 font-bold">Time</h3>
             <div class="flex">
               <!-- 7:00 AM -->
               <div class="flex items-center mr-4">
@@ -1122,4 +1122,7 @@ export default {
 </script>
 
 <style>
+.dp__pointer {
+  border-radius: 0.375rem;
+}
 </style>
