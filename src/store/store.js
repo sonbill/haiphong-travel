@@ -11,6 +11,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, up
 
 
 
+
 const store = createStore({
   state: {
     user: null,
@@ -22,7 +23,7 @@ const store = createStore({
     recommended: null,
     history: null,
     destinations: null,
-    showModal: false
+    bookedID: null
   },
   getters: {
     token: state => state.token,
@@ -35,7 +36,7 @@ const store = createStore({
     recommended: state => state.recommended,
     history: state => state.history,
     destinations: state => state.destinations,
-    showModal: state => state.showModal,
+    bookedID: state => state.bookedID,
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -68,8 +69,8 @@ const store = createStore({
     SET_DESTINATIONS(state, destinations) {
       state.destinations = destinations;
     },
-    TOGGLE_MODAL(state) {
-      state.showModal = !state.showModal;
+    SET_BOOKEDID(state, bookedID) {
+      state.bookedID = bookedID;
 
     }
   },
@@ -375,7 +376,8 @@ const store = createStore({
             guests: tourInfor.value.guests,
             time: tourInfor.value.time,
           });
-          alert(`Successfully Booked ${tourInfor.value.bookedID}`)
+          // alert(`Successfully Booked ${tourInfor.value.bookedID}`)
+          vuexContext.commit('SET_BOOKEDID', tourInfor.value.bookedID)
         } else {
           alert("error")
         }

@@ -7,6 +7,12 @@
       @close="toggleModal"
       @book="bookTour"
     />
+    <Popup
+      :bookedID="bookedID"
+      :popupTitle="popupContent.title"
+      :popupContent="popupContent.msg"
+      @close="setNullBookedID"
+    />
     <div class="flex flex-col md:flex-row justify-between">
       <!-- ITEM - 1 -->
       <div>
@@ -943,6 +949,7 @@
 import TabsWrapper from "../../components/Tours/DetailTour/TabsWrapper.vue";
 import Tab from "../../components/Tours/DetailTour/Tab.vue";
 import Modal from "../../components/Modal.vue";
+import Popup from "../../components/Popup.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import axios from "axios";
 import { ref, onMounted, computed, reactive } from "vue";
@@ -962,6 +969,7 @@ export default {
     Tab,
     TabsWrapper,
     Modal,
+    Popup,
   },
 
   setup() {
@@ -1056,6 +1064,18 @@ export default {
     const toggleModal = () => {
       modalActive.value = !modalActive.value;
     };
+    // POPUP
+    const popupContent = reactive({
+      title: "Successfully Booked",
+      msg: "Booking ID",
+    });
+
+    const bookedID = computed(() => {
+      return store.getters.bookedID;
+    });
+    const setNullBookedID = () => {
+      store.state.bookedID = null;
+    };
 
     const breakpoints = {
       // 700px and up
@@ -1092,6 +1112,9 @@ export default {
       modalActive,
       modalContent,
       toggleModal,
+      bookedID,
+      popupContent,
+      setNullBookedID,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },
