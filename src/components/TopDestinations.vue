@@ -1,10 +1,10 @@
 <template>
   <div class="px-5 md:px-60 mx-auto">
     <!-- TITLE -->
-    <div class="flex flex-col items-center space-y-5">
+    <div class="flex flex-col items-center space-y-10 mb-20">
       <p class="text-md font-bold">CHOOSE YOUR EXPERIENCE!</p>
       <h2 class="text-5xl font-bold">Top Attractions Destinations</h2>
-      <span>-----</span>
+      <p class="border w-20"></p>
     </div>
     <!-- GRID -->
     <div class="grid gap-4">

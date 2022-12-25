@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="title == selectedTitle"
-    class="max-w-5xl tracking-normal text-justify leading-6"
+    class="max-w-4xl tracking-normal text-justify leading-6"
   >
     <slot />
   </div>

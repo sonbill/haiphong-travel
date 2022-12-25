@@ -44,22 +44,24 @@
         <div class="px-4 pb-4 mt-4">
           <div class="flex justify-between">
             <!-- ITEM - NAME -->
-            <router-link
-              :to="{ name: 'DetailTour', params: { tourID: destination.id } }"
-            >
-              <h3
-                class="
-                  text-gray-900
-                  font-semibold
-                  text-xl
-                  tracking-tight
-                  dark:text-white
-                "
+            <div class="max-w-[270px]">
+              <router-link
+                :to="{ name: 'DetailTour', params: { tourID: destination.id } }"
               >
-                {{ destination.tourName }}
-              </h3>
-              <p class="text-zinc-500">{{ destination.tourPlace }}</p>
-            </router-link>
+                <h3
+                  class="
+                    text-gray-900
+                    font-semibold
+                    text-xl
+                    tracking-tight
+                    dark:text-white
+                  "
+                >
+                  {{ destination.tourName }}
+                </h3>
+                <p class="text-zinc-500">{{ destination.tourPlace }}</p>
+              </router-link>
+            </div>
             <!-- ITEM - TIME -->
             <div
               v-if="destination.time > 1"

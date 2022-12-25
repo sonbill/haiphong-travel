@@ -42,20 +42,22 @@
         <div class="px-5 pb-5 mt-5">
           <div class="flex justify-between">
             <!-- ITEM - NAME -->
-            <router-link :to="tour.id">
-              <h3
-                class="
-                  text-gray-900
-                  font-semibold
-                  text-xl
-                  tracking-tight
-                  dark:text-white
-                "
-              >
-                {{ tour.tourName }}
-              </h3>
-              <p class="text-zinc-500">{{ tour.tourPlace }}</p>
-            </router-link>
+            <div class="max-w-[270px]">
+              <router-link :to="tour.id">
+                <h3
+                  class="
+                    text-gray-900
+                    font-semibold
+                    text-xl
+                    tracking-tight
+                    dark:text-white
+                  "
+                >
+                  {{ tour.tourName }}
+                </h3>
+                <p class="text-zinc-500">{{ tour.tourPlace }}</p>
+              </router-link>
+            </div>
             <!-- ITEM - TIME -->
             <div
               v-if="tour.time > 1"

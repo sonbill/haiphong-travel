@@ -21,7 +21,8 @@ const store = createStore({
     tour: null,
     recommended: null,
     history: null,
-    destinations: null
+    destinations: null,
+    showModal: false
   },
   getters: {
     token: state => state.token,
@@ -34,6 +35,7 @@ const store = createStore({
     recommended: state => state.recommended,
     history: state => state.history,
     destinations: state => state.destinations,
+    showModal: state => state.showModal,
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -66,6 +68,10 @@ const store = createStore({
     SET_DESTINATIONS(state, destinations) {
       state.destinations = destinations;
     },
+    TOGGLE_MODAL(state) {
+      state.showModal = !state.showModal;
+
+    }
   },
   actions: {
     // async authenticate(vuexContext, credentials) {
@@ -369,8 +375,7 @@ const store = createStore({
             guests: tourInfor.value.guests,
             time: tourInfor.value.time,
           });
-          alert("Successfully Booked")
-          // ...
+          alert(`Successfully Booked ${tourInfor.value.bookedID}`)
         } else {
           alert("error")
         }

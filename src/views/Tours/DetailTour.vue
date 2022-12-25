@@ -1,6 +1,13 @@
 <template>
   <div class="max-w-7xl mx-auto" v-if="tour">
-    <div class="flex flex-col md:flex-row">
+    <Modal
+      :modalTitle="modalContent.title"
+      :modalContent="modalContent.msg"
+      :modalActive="modalActive"
+      @close="toggleModal"
+      @book="bookTour"
+    />
+    <div class="flex flex-col md:flex-row justify-between">
       <!-- ITEM - 1 -->
       <div>
         <!-- HEADER -->
@@ -173,7 +180,9 @@
             <TabsWrapper>
               <Tab title="Overview">
                 <span class="block text-xl mb-3">DESCRIPTION</span>
-                <p class="text-gray-500 text-md">{{ tour.description }}</p>
+                <p class="text-gray-500 text-md">
+                  {{ tour.description }}
+                </p>
               </Tab>
               <Tab title="Tour Plan">
                 <p class="text-xl mb-3">TOUR PLAN</p>
@@ -185,7 +194,263 @@
                   <li class="font-bold text-lg list-disc mb-3">{{ plan }}</li>
                 </ul>
               </Tab>
-              <Tab title="Reviews">5 sao</Tab>
+              <Tab title="Reviews">
+                <div class="w-full">
+                  <div class="flex items-center mb-3">
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>First star</title>
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Second star</title>
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Third star</title>
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-yellow-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Fourth star</title>
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <svg
+                      aria-hidden="true"
+                      class="w-5 h-5 text-gray-300 dark:text-gray-500"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <title>Fifth star</title>
+                      <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                      ></path>
+                    </svg>
+                    <p
+                      class="
+                        ml-2
+                        text-sm
+                        font-medium
+                        text-gray-900
+                        dark:text-white
+                      "
+                    >
+                      4.95 out of 5
+                    </p>
+                  </div>
+                  <p
+                    class="text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >
+                    1,745 global ratings
+                  </p>
+                  <div class="flex items-center mt-4">
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >5 star</span
+                    >
+                    <div
+                      class="
+                        w-4/6
+                        h-5
+                        mx-4
+                        bg-gray-200
+                        rounded
+                        dark:bg-gray-700
+                      "
+                    >
+                      <div
+                        class="h-5 bg-yellow-400 rounded"
+                        style="width: 70%"
+                      ></div>
+                    </div>
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >70%</span
+                    >
+                  </div>
+                  <div class="flex items-center mt-4">
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >4 star</span
+                    >
+                    <div
+                      class="
+                        w-4/6
+                        h-5
+                        mx-4
+                        bg-gray-200
+                        rounded
+                        dark:bg-gray-700
+                      "
+                    >
+                      <div
+                        class="h-5 bg-yellow-400 rounded"
+                        style="width: 17%"
+                      ></div>
+                    </div>
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >17%</span
+                    >
+                  </div>
+                  <div class="flex items-center mt-4">
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >3 star</span
+                    >
+                    <div
+                      class="
+                        w-4/6
+                        h-5
+                        mx-4
+                        bg-gray-200
+                        rounded
+                        dark:bg-gray-700
+                      "
+                    >
+                      <div
+                        class="h-5 bg-yellow-400 rounded"
+                        style="width: 8%"
+                      ></div>
+                    </div>
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >8%</span
+                    >
+                  </div>
+                  <div class="flex items-center mt-4">
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >2 star</span
+                    >
+                    <div
+                      class="
+                        w-4/6
+                        h-5
+                        mx-4
+                        bg-gray-200
+                        rounded
+                        dark:bg-gray-700
+                      "
+                    >
+                      <div
+                        class="h-5 bg-yellow-400 rounded"
+                        style="width: 4%"
+                      ></div>
+                    </div>
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >4%</span
+                    >
+                  </div>
+                  <div class="flex items-center mt-4">
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >1 star</span
+                    >
+                    <div
+                      class="
+                        w-4/6
+                        h-5
+                        mx-4
+                        bg-gray-200
+                        rounded
+                        dark:bg-gray-700
+                      "
+                    >
+                      <div
+                        class="h-5 bg-yellow-400 rounded"
+                        style="width: 1%"
+                      ></div>
+                    </div>
+                    <span
+                      class="
+                        text-sm
+                        font-medium
+                        text-blue-600
+                        dark:text-blue-500
+                      "
+                      >1%</span
+                    >
+                  </div>
+                </div>
+              </Tab>
             </TabsWrapper>
           </div>
 
@@ -211,76 +476,7 @@
               <Datepicker v-model="dateBooking" range :partial-range="false" />
             </div>
           </div>
-          <!-- PICK TIMES -->
-          <div>
-            <h3 class="mb-2">Time</h3>
-            <div class="flex">
-              <!-- 7:00 AM -->
-              <div class="flex items-center mr-4">
-                <input
-                  id="inline-radio"
-                  type="radio"
-                  v-model="dataBooked.time"
-                  value="7:00"
-                  name="inline-radio-group"
-                  class="
-                    w-4
-                    h-4
-                    text-blue-600
-                    bg-gray-100
-                    border-gray-300
-                    focus:ring-blue-500
-                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
-                    focus:ring-2
-                    dark:bg-gray-700 dark:border-gray-600
-                  "
-                />
-                <label
-                  for="inline-radio"
-                  class="
-                    ml-2
-                    text-sm
-                    font-medium
-                    text-gray-900
-                    dark:text-gray-300
-                  "
-                  >7:00 AM</label
-                >
-              </div>
-              <!-- 15:00 PM -->
-              <div class="flex items-center mr-4">
-                <input
-                  v-model="dataBooked.time"
-                  id="inline-checked-radio"
-                  type="radio"
-                  value="15:00"
-                  name="inline-radio-group"
-                  class="
-                    w-4
-                    h-4
-                    text-blue-600
-                    bg-gray-100
-                    border-gray-300
-                    focus:ring-blue-500
-                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
-                    focus:ring-2
-                    dark:bg-gray-700 dark:border-gray-600
-                  "
-                />
-                <label
-                  for="inline-checked-radio"
-                  class="
-                    ml-2
-                    text-sm
-                    font-medium
-                    text-gray-900
-                    dark:text-gray-300
-                  "
-                  >15:00 PM</label
-                >
-              </div>
-            </div>
-          </div>
+
           <!-- GUESTS -->
           <div>
             <div
@@ -453,9 +649,80 @@
               </div>
             </div>
           </div>
+          <!-- PICK TIMES -->
+          <div>
+            <h3 class="mb-2">Time</h3>
+            <div class="flex">
+              <!-- 7:00 AM -->
+              <div class="flex items-center mr-4">
+                <input
+                  id="inline-radio"
+                  type="radio"
+                  v-model="dataBooked.time"
+                  value="7:00"
+                  name="inline-radio-group"
+                  class="
+                    w-4
+                    h-4
+                    text-blue-600
+                    bg-gray-100
+                    border-gray-300
+                    focus:ring-blue-500
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                    focus:ring-2
+                    dark:bg-gray-700 dark:border-gray-600
+                  "
+                />
+                <label
+                  for="inline-radio"
+                  class="
+                    ml-2
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  >7:00 AM</label
+                >
+              </div>
+              <!-- 15:00 PM -->
+              <div class="flex items-center mr-4">
+                <input
+                  v-model="dataBooked.time"
+                  id="inline-checked-radio"
+                  type="radio"
+                  value="15:00"
+                  name="inline-radio-group"
+                  class="
+                    w-4
+                    h-4
+                    text-blue-600
+                    bg-gray-100
+                    border-gray-300
+                    focus:ring-blue-500
+                    dark:focus:ring-blue-600 dark:ring-offset-gray-800
+                    focus:ring-2
+                    dark:bg-gray-700 dark:border-gray-600
+                  "
+                />
+                <label
+                  for="inline-checked-radio"
+                  class="
+                    ml-2
+                    text-sm
+                    font-medium
+                    text-gray-900
+                    dark:text-gray-300
+                  "
+                  >15:00 PM</label
+                >
+              </div>
+            </div>
+          </div>
           <!-- BUTTON -->
           <button
-            type="submit"
+            @click="toggleModal()"
+            type="button"
             class="
               block
               uppercase
@@ -675,6 +942,7 @@
 <script>
 import TabsWrapper from "../../components/Tours/DetailTour/TabsWrapper.vue";
 import Tab from "../../components/Tours/DetailTour/Tab.vue";
+import Modal from "../../components/Modal.vue";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
 import axios from "axios";
 import { ref, onMounted, computed, reactive } from "vue";
@@ -693,6 +961,7 @@ export default {
     Navigation,
     Tab,
     TabsWrapper,
+    Modal,
   },
 
   setup() {
@@ -728,8 +997,12 @@ export default {
       guests: totalGuest.value,
     }));
 
+    // const bookTour = () => {
+    //   store.dispatch("bookTour", dataBooked);
+    // };
     const bookTour = () => {
       store.dispatch("bookTour", dataBooked);
+      modalActive.value = false;
     };
 
     // const formatTotalGuest = computed(() => {
@@ -773,6 +1046,17 @@ export default {
       indexOfActive.value = index;
     };
 
+    // MODAL
+    const modalContent = reactive({
+      title: "Booking confirm",
+      msg: "Are you sure you want to book?",
+    });
+    const modalActive = ref(false);
+
+    const toggleModal = () => {
+      modalActive.value = !modalActive.value;
+    };
+
     const breakpoints = {
       // 700px and up
       800: {
@@ -805,6 +1089,9 @@ export default {
       dataBooked,
       bookTour,
       totalGuest,
+      modalActive,
+      modalContent,
+      toggleModal,
     };
     // GET https://triplocator.net/api/rest/get/tour/{tour_id}
   },

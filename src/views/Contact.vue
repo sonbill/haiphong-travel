@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-7xl px-4 sm:px-6">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 mt-20">
     <!-- PAGE TITLE -->
     <h1 class="font-bold text-5xl mb-10">{{ PageTitle }}</h1>
     <!-- CONTACT - CONTENT -->

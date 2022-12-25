@@ -7,7 +7,7 @@
       <div class="space-y-7 flex flex-col items-center mb-20">
         <p class="text-md font-bold">EXPLORE OUR TOURS</p>
         <h2 class="text-4xl font-bold">New and Most Popular Tours</h2>
-        <span>-</span>
+        <p class="border w-24"></p>
       </div>
       <TourCard />
     </div>
