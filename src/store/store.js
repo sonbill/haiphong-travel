@@ -129,13 +129,16 @@ const store = createStore({
 
       try {
         await createUserWithEmailAndPassword(auth, email, password)
-          .then(async (user) => {
-            await setDoc(doc(db, "profiles", user.user.uid), {
-              email: email,
-              password: password,
-              displayName: displayName
-            });
-          })
+          // .then(async (user) => {
+          //   await setDoc(doc(db, "profiles", user.user.uid), {
+          //     email: email,
+          //     password: password,
+          //     displayName: displayName
+          //   });
+          // })
+          .then(
+            console.log('register successfully')
+          )
       } catch (error) {
         switch (error.code) {
           case 'auth/email-already-in-use':
